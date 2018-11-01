@@ -1,0 +1,21 @@
+.welcome {
+  text-align: "center";
+  font-size: 35px;
+  background-color: rgba(110, 29, 29, 0.11);
+}
+.fContainer{
+  /*background: red;*/
+  display: flex;
+  flex-direction: row;
+  padding-top: 10px 0;
+  justify-content: center;
+}
+.flexItem{
+/* background: yellow;	*/
+ padding:20px;
+ padding-left: 10px;
+}
+
+.divStyle{
+	padding-top: 5px;
+}
