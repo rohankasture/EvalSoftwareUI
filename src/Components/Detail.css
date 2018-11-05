@@ -1,0 +1,62 @@
+.mainContainer{
+    height: 400px;
+    width: auto;
+    border: 3px solid black;
+}
+
+.container{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    height: 17%;
+    width: auto;
+}
+
+.labelStyle{
+    display: inline-block;
+    font-size: 20px;
+    font-family: 'Calibri';
+    font-weight: bold;
+    width  : 40%;
+    height: auto;
+}
+
+.inputStyle{
+    display: inline-block;
+    width: 60%;
+    height: auto;
+}
+
+.descriptionContainer{
+    width: auto;
+    height: 37%;
+}
+
+.descriptionStyle{
+    display: inline-block;
+    font-size: 20px;
+    font-family: 'Calibri';
+    font-weight: bold;
+    width: 40%;
+    height: auto;
+}
+
+.desInputStyle{
+    display: inline-block;
+    width: 60%;
+    height: auto;
+    justify-self: stretch;
+}
+
+.buttonDivStyle{
+    align-content: center;
+    width: auto;
+    height: 12%;
+}
+
+.buttonStyle{
+    width: 100px;
+    height: 30px;
+    font-weight: bold;
+}
