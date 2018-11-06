@@ -11,7 +11,7 @@ constructor(props){
 
 render(){
 return (
-	<div>
+	<div onClick = {this.props.onClick}>
 	<p>{this.props.name}
 	<span>{this.props.rank}</span>
 	</p> 
