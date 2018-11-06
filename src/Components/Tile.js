@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import "./Tile.css";
 
 class Tile extends Component{
 
@@ -11,7 +12,7 @@ constructor(props){
 
 render(){
 return (
-	<div onClick = {this.props.onClick}>
+	<div onClick = {this.props.onClick} className="nameStyle">
 	<p>{this.props.name}
 	<span>{this.props.rank}</span>
 	</p> 

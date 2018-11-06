@@ -3,38 +3,33 @@ import Tile from './Tile';
 import Detail from './Detail';
 import './MainPage.css'
 class MainPage extends Component{
-/*
-  <Tile name = 'Rohan' />
-	  <Detail rank = '1' name = 'Rocco' token = '50' descrription  = 'I am MS student'/>
-*/
-// let data = [{},{}]
 
 constructor(props){
 super(props);
 this.state= {
 	data : [{rank:'1',name : 'Rohan',token : '50', adjective :'Brilliant',description :'Best'},
-	{rank:'2',name : 'Praneta',token : '50', adjective :'Friendly',description :'Good'}],
+	{rank:'2',name : 'Praneta',token : '50', adjective :'Friendly',description :'Good'},
+	{rank:'3',name : 'Rocco',token : '30', adjective :'Smart',description :'Pokemon player'}],
 	selected : {},
 };
-// this.handleOnClick = this.handleOnClick.bind(this);
 }
 
 // handleOnClick(id) - > will set the selected property in state to the selected id from data. eg selected = data[id]
 handleOnClick = (id) =>{
-	// event.preventDefault();
-	console.log("id= ", id);
-	//this.state.selected = this.state.data[id]; 
 	this.setState({selected:this.state.data[id]});
-	console.log('selected');
 }
 
 render(){
+	let rows = [];
+	for (let i=0; i<this.state.data.length; i++){
+		console.log('i == ',this.state.data[i].name);
+		rows.push(<Tile name = {this.state.data[i].name} onClick={()=>this.handleOnClick(i)} />)
+	}
 return (
 	<div className = "mContainer" >
 	{/* iterate through data and show tile */}
 		<div className="nameDivStyle">
-			<div className="nameStyle" ><Tile name =' Rohan' onClick={() =>this.handleOnClick(0)}/></div>
-			<div className="nameStyle"><Tile name = 'Praneta' onClick={()=>this.handleOnClick(1)}/></div> 
+			<div className="nameChildStyle">{rows}</div>
 		</div>
 		<div className="detailStyle">
 			<div>
