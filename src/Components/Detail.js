@@ -1,6 +1,6 @@
 import React, {Component } from "react";
 import "./Detail.css";
-
+import Dropdown from 'react-dropdown';
 class Detail extends Component{
 constructor(props){
 	/*<button  onClick = {this.handleClick}> Done</button><br/>*/ 
@@ -14,6 +14,10 @@ constructor(props){
 handleClick = event =>{
 console.log('Clicked');
 }
+
+handleChange = event =>{
+	console.log('Changed');
+	}
 render(){
 	return(
 		<div className="mainContainer">
@@ -30,7 +34,10 @@ render(){
 
 		<div className="container">
 			<div className="labelStyle"><label> Adjective:</label></div>
-			<div className="inputStyle"><input type={Text} value={this.props.adjective} /></div>
+			<div className="inputStyle">
+			<Dropdown options = {this.props.options} onChange = {this.handleChange} value = {this.props.adjective} placeholder = "Select an adjective" ></Dropdown>
+			</div>
+			{/* <input type={Text} value={this.props.adjective} /></div> */}
 		</div>	
 
 		<div className="descriptionContainer">

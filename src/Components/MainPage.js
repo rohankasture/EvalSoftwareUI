@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import Tile from './Tile';
 import Detail from './Detail';
+import Dropdown from 'react-dropdown';
 import './MainPage.css'
 class MainPage extends Component{
-
 constructor(props){
 super(props);
 this.state= {
@@ -11,6 +11,22 @@ this.state= {
 	{rank:'2',name : 'Praneta',token : '50', adjective :'Friendly',description :'Good'},
 	{rank:'3',name : 'Rocco',token : '30', adjective :'Smart',description :'Pokemon player'}],
 	selected : {},
+	options : [
+		{ value: 'one', label: 'One' },
+		{ value: 'two', label: 'Two' },
+		{
+		 type: 'group', name: 'group1', items: [
+		   { value: 'three', label: 'Three' },
+		   { value: 'four', label: 'Four' }
+		 ]
+		},
+		{
+		 type: 'group', name: 'group2', items: [
+		   { value: 'five', label: 'Five' },
+		   { value: 'six', label: 'Six' }
+		 ]
+		}
+		]
 };
 }
 
@@ -34,13 +50,11 @@ return (
 		<div className="detailStyle">
 			<div>
 				{/* give selected item properties to the details view */}
-			<Detail rank = {this.state.selected.rank} name = {this.state.selected.name} token = {this.state.selected.token} adjective = {this.state.selected.adjective} description  = {this.state.selected.description}/>
+			<Detail options = {this.state.options} rank = {this.state.selected.rank} name = {this.state.selected.name} token = {this.state.selected.token} adjective = {this.state.selected.adjective} description  = {this.state.selected.description}/>
 			</div>
 		</div>
 	 </div>
-
 	);
 }
 }
-
 export default MainPage;
