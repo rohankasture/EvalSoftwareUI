@@ -11,7 +11,7 @@
       display: inline-flex;
       justify-content: flex-start;
       flex-direction: column;
-      width: 30%;
+      width: 20%;
   }
 
   .nameChildStyle{
@@ -23,5 +23,5 @@
   .detailStyle{
       display: flex;
       flex-direction: column;
-      width: 70%;
+      width: 80%;
   }

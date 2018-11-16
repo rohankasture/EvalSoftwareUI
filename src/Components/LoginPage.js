@@ -38,6 +38,7 @@ class LoginPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
+  
     };
     this.handleSearch = this.handleSearch.bind(this);
   }
