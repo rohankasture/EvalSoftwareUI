@@ -18,7 +18,7 @@ ReactDOM.render(
     <Provider store={createStoreWithMiddleware(reducers)}>
     <App />
   </Provider>
-  , document.getElementById('root'));
+  , document.querySelector('.container'));
 
 
 // If you want your app to work offline and load faster, you can change

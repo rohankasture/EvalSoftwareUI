@@ -1,7 +1,6 @@
 import React, {Component } from "react";
 import {connect} from 'react-redux';
-
-
+import './evaluee_detail.css';
 
 class EvalueeDetail extends Component{
 constructor(props){

@@ -10,7 +10,10 @@ import { BrowserRouter, Route } from "react-router-dom";
 class App extends Component {
   render() {
     return (
-      <div>
+      <div class="row">
+        <div class ="col">
+
+        </div>
         <EvalueeList/>
         <EvalueeDetail/>
       </div>

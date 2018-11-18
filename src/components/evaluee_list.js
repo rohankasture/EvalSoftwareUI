@@ -11,7 +11,7 @@ class EvalueeList extends Component{
                 <li 
                     key = {evaluee.name} 
                     onClick= {()=> this.props.selectEvaluee(evaluee)}
-                    className ="nameStyle">
+                    className ="list-group-item">
                     {evaluee.name}
                 </li>
             );
