@@ -47,8 +47,8 @@ render(){
 		</div>	
 
 		<div className="descriptionContainer">
-			<div className="descriptionStyle"><label> Description:</label></div>
-			<div className="desInputStyle"> <textarea  value={this.props.description} /></div>
+			<div className="labelStyle"><label> Description:</label></div>
+			<div className="desInputStyle"> <textarea rows = {5} value={this.props.description} /></div>
 		</div>	
 
 		<div className="buttonDivStyle">

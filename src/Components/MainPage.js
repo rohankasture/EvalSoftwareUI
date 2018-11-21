@@ -20,20 +20,18 @@ class MainPage extends Component {
 			],
 			selected: {},
 			options: [
-				// { value: 'one', label: 'Ok' },
-				// { value: 'two', label: 'Dependable' },
-				// {
-				//  type: 'group', name: 'Good Adjectives', items: [
-				//    { value: 'three', label: 'Brilliant' },
-				//    { value: 'four', label: 'Professional' }
-				//  ]
-				// },
-				// {
-				//  type: 'group', name: 'Bad Adjectives', items: [
-				//    { value: 'five', label: 'Unreliable' },
-				//    { value: 'six', label: 'Useless' }
-				//  ]
-				// }
+				{
+				 type: 'group', name: 'Good Adjectives', items: [
+				   { value: 'three', label: 'Brilliant' },
+				   { value: 'four', label: 'Professional' }
+				 ]
+				},
+				{
+				 type: 'group', name: 'Bad Adjectives', items: [
+				   { value: 'five', label: 'Unreliable' },
+				   { value: 'six', label: 'Useless' }
+				 ]
+				}
 			]
 		};
 	}

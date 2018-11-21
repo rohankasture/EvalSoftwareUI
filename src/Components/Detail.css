@@ -1,14 +1,16 @@
 .mainContainer{
-    height: 400px;
+    height: 420px;
     width: auto;
     border: 1.5px solid black;
-}
+    padding-top: 1%;
+  }
 
 .container{
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: flex-start;
+    /* justify-content: flex-start; */
+    justify-content: center;
     height: 13%;
     width: auto;
 }
@@ -18,8 +20,13 @@
     font-size: 20px;
     font-family: 'Calibri';
     font-weight: bold;
-    width  : 40%;
+    width  : 15%;
     height: auto;
+    vertical-align: top;
+    text-align: left;
+    margin-left:20%;
+    margin-right: 5%; 
+    
 }
 
 .inputStyle{
@@ -29,30 +36,38 @@
 }
 
 .descriptionContainer{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    padding-top: 5%;
     width: auto;
-    height: 49%;
+    height: 40%;
 }
 
-.descriptionStyle{
+/* .descriptionStyle{
     display: inline-block;
     font-size: 20px;
     font-family: 'Calibri';
     font-weight: bold;
     width: 40%;
     height: auto;
-}
+    vertical-align: top;
+    text-align: center;
+} */
 
 .desInputStyle{
     display: inline-block;
-    width: 60%;
+    width: 50%;
     height: auto;
     justify-self: stretch;
+    margin-left: 7%;
 }
 
 .buttonDivStyle{
     align-content: center;
     width: auto;
-    height: 12%;
+    height:10%;
 }
 
 .buttonStyle{
