@@ -2,12 +2,13 @@ import React, { Component } from "react";
 import "./Tile.css";
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
-const theme = createMuiTheme({
-	palette: {
-	  primary: { main: '#009688' }, // Purple and green play nicely together.
-	  secondary: { main: '#11cb5f' }, // This is just green.A700 as hex.
-	},
-  });
+import muiTheme from './Theme.js';
+// const theme = createMuiTheme({
+// 	palette: {
+// 	  primary: { main: '#009688' }, // Purple and green play nicely together.
+// 	  secondary: { main: '#11cb5f' }, // This is just green.A700 as hex.
+// 	},
+//   });
 class Tile extends Component {
 
 	constructor(props) {
@@ -29,8 +30,8 @@ class Tile extends Component {
 			<div
 				
 				onClick={this.props.onClick} className="nameStyle">
-				<MuiThemeProvider theme={theme}>
-     				 <Button variant ='contained' color="primary" fullWidth value = "rkasture" ></Button>
+				<MuiThemeProvider theme={muiTheme}>
+     				 <Button variant ='contained' color="primary"  fullWidth value = "rkasture" ></Button>
 					<p>{this.props.name}</p>
 				</MuiThemeProvider> 	
 			</div>

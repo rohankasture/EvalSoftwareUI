@@ -29,3 +29,7 @@
     overflow-y: scroll;
     height: 400px;
   }
+  .liststyle{
+    display: flex;
+    justify-content: right;     
+}

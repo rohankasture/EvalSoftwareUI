@@ -104,7 +104,7 @@ class MainPage extends Component {
 									{this.state.data.map((user, index) => (
 										<Draggable key={user.userId} draggableId={user.userId} index={index}>
 											{(provided, snapshot) => (
-												<div  
+												<div className ="liststyle" 
 													ref={provided.innerRef}
 													{...provided.draggableProps}
 													{...provided.dragHandleProps}>

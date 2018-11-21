@@ -2,11 +2,10 @@ import React, {Component } from "react";
 import "./Detail.css";
 import Dropdown from 'react-dropdown';
 import Button from '@material-ui/core/Button';
-import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import muiTheme from './Theme.js';
+import {MuiThemeProvider} from '@material-ui/core/styles';
 
-import purple from '@material-ui/core/colors/purple';
-
-const muiTheme = createMuiTheme({ palette: { primary: {main:purple[500]}, secondary: {main:'#9b59b6'},},})	
 class Detail extends Component{
 constructor(props){
 	/*<button  onClick = {this.handleClick}> Done</button><br/>*/ 
@@ -26,6 +25,8 @@ handleChange = event =>{
 	}
 render(){
 	return(
+		<MuiThemeProvider theme = {muiTheme}>
+		<CssBaseline/>
 		<div className="mainContainer">
 
 		<div className="container">
@@ -48,16 +49,14 @@ render(){
 
 		<div className="descriptionContainer">
 			<div className="labelStyle"><label> Description:</label></div>
-			<div className="desInputStyle"> <textarea rows = {5} value={this.props.description} /></div>
+			<div className="desInputStyle"> <textarea onDrag = {false} rows = {5} value={this.props.description} /></div>
 		</div>	
 
 		<div className="buttonDivStyle">
-			<MuiThemeProvider theme = {muiTheme}>
 			<Button color = "secondary" variant ='contained' className="buttonStyle"  onClick = {this.handleClick}> Done</Button>
-			</MuiThemeProvider>
 		</div>
-			
 		</div>
+		</MuiThemeProvider>
 		);
 }
 
