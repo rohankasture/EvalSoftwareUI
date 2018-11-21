@@ -1,6 +1,12 @@
 import React, {Component } from "react";
 import "./Detail.css";
 import Dropdown from 'react-dropdown';
+import Button from '@material-ui/core/Button';
+import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
+
+import purple from '@material-ui/core/colors/purple';
+
+const muiTheme = createMuiTheme({ palette: { primary: {main:purple[500]}, secondary: {main:'#9b59b6'},},})	
 class Detail extends Component{
 constructor(props){
 	/*<button  onClick = {this.handleClick}> Done</button><br/>*/ 
@@ -46,7 +52,9 @@ render(){
 		</div>	
 
 		<div className="buttonDivStyle">
-			<button className="buttonStyle"  onClick = {this.handleClick}> Done</button>
+			<MuiThemeProvider theme = {muiTheme}>
+			<Button color = "secondary" variant ='contained' className="buttonStyle"  onClick = {this.handleClick}> Done</Button>
+			</MuiThemeProvider>
 		</div>
 			
 		</div>

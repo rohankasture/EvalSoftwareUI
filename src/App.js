@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import LoginPage from "./Components/LoginPage";
+// import LoginPage from "./Components/LoginPage";
+import LoginPage from "./Components/LoginPage2";
 import MainPage from "./Components/MainPage";
 import axios from 'axios';
 import './App.css';

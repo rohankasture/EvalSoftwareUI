@@ -6,8 +6,6 @@ import './MainPage.css';
 import axios from 'axios';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 
-
-  
 class MainPage extends Component {
 	constructor(props) {
 		super(props);
@@ -15,7 +13,10 @@ class MainPage extends Component {
 			data: [
 				{ rank: 1, name: 'Rohan Kasture', token: '50', adjective: 'Brilliant', description: 'Best', userId: 'rkasture' },
 				{ rank: 2, name: 'Praneta Paithankar', token: '50', adjective: 'Friendly', description: 'Good', userId: 'ppaithan' },
-				{ rank: 3, name: 'Rocco Manzo', token: '30', adjective: 'Smart', description: 'Pokemon player', userId: 'rmanzo' }
+				{ rank: 3, name: 'Rocco Manzo', token: '30', adjective: 'Smart', description: 'Pokemon player', userId: 'rmanzo' },
+				{ rank: 4, name: 'Shradha Baranwal', token: '30', adjective: 'Energetic', description: 'Smart', userId: 'sbaranwa' },
+				{ rank: 5, name: 'Murtaza Khambaty', token: '10', adjective: 'Professional', description: 'Workaholic', userId: 'mkhambaty' }
+				
 			],
 			selected: {},
 			options: [
@@ -91,19 +92,21 @@ class MainPage extends Component {
 	render() {
 
 		return (
-			<div className="mContainer" >
+			<div>
+				<h1>Hello FirstName LastName</h1>
+			<div className="mContainer">	
 				{/* iterate through data and show tile */}
 				<div className="nameDivStyle">
 					<DragDropContext onDragEnd={this.onDragEnd}>
 						<Droppable droppableId="droppable">
 							{
 								(provided, snapshot) => (
-								<div
+								<div className="scrollable"
 									ref={provided.innerRef}>
 									{this.state.data.map((user, index) => (
 										<Draggable key={user.userId} draggableId={user.userId} index={index}>
 											{(provided, snapshot) => (
-												<div 
+												<div  
 													ref={provided.innerRef}
 													{...provided.draggableProps}
 													{...provided.dragHandleProps}>
@@ -127,6 +130,7 @@ class MainPage extends Component {
 						<Detail options={this.state.options} rank={this.state.selected.rank} name={this.state.selected.name} token={this.state.selected.token} adjective={this.state.selected.adjective} description={this.state.selected.description} />
 					</div>
 				</div>
+			</div>
 			</div>
 		);
 	}
