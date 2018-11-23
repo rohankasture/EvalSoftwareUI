@@ -4,9 +4,7 @@ import { dark, light } from '@material-ui/core/styles/createPalette';
 
 export default createMuiTheme(
 	{ palette: {
-		// background: {
-		// 	default : '#0b172a'
-		// },
+		
 		primary: {
             main:'#00838f'}, 
             contrastText : '#376e6f',
@@ -15,8 +13,8 @@ export default createMuiTheme(
             main:'#5932a5',
             // contrastText : '#000',
         },
-        // type: 'dark',
-        // contrastThreshold:3,
-		// tonalOffset:0.2	
+        typography: {
+            useNextVariants: true,
+            },
     });	
     

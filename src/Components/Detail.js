@@ -1,65 +1,153 @@
-import React, {Component } from "react";
+import React, { Component } from "react";
 import "./Detail.css";
 import Dropdown from 'react-dropdown';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import muiTheme from './Theme.js';
-import {MuiThemeProvider} from '@material-ui/core/styles';
+import { MuiThemeProvider } from '@material-ui/core/styles';
+import Card from '@material-ui/core/Card';
+import CardActions from '@material-ui/core/CardActions'
+import CardContent from '@material-ui/core/CardContent';
+import PropTypes from 'prop-types';
+import { withStyles } from '@material-ui/core/styles';
+import { Grid, Input, Typography, TextField, FormControl } from "@material-ui/core";
 
-class Detail extends Component{
-constructor(props){
-	/*<button  onClick = {this.handleClick}> Done</button><br/>*/ 
-	super(props);
-	this.handleClick = this.handleClick.bind(this);
-	this.state = {
-		id : this.props.id,
-	};
+const styles = theme => ({
+	card: {
+		height: '90%',
+		width: '100%',
+		minWidth: '600px',
+		overflowY: 'auto',
+	},
+	content: {
+		height: '80%'
+	},
+	actions: {
+		display: 'flex',
+		justifyContent: 'center',
+	},
+	button: {
+		marginTop: theme.spacing.unit * 3,
+		marginLeft: theme.spacing.unit,
+	},
 	
-}
-handleClick = event =>{
-console.log('Clicked');
-}
-
-handleChange = event =>{
-	console.log('Changed');
+	text: {
+		verticalAlign: "top",
+		textAlign: "left"
+	},
+	description: {
+		width: '100%',
+		minWidth: '300px'
 	}
-render(){
-	return(
-		<MuiThemeProvider theme = {muiTheme}>
-		<CssBaseline/>
-		<div className="mainContainer">
 
-		<div className="container">
-			<div className="labelStyle"><label> Rank:</label></div>
-			<div className="inputStyle"><input type={Text} value={this.props.rank}/></div>
-		</div>
+});
 
-		<div className="container">
-			<div className="labelStyle"><label> Token:</label></div>
-			<div className="inputStyle"><input type={Text} value={this.props.token} /></div>
-		</div>
+class Detail extends Component {
+	constructor(props) {
+		/*<button  onClick = {this.handleClick}> Done</button><br/>*/
+		super(props);
+		this.handleClick = this.handleClick.bind(this);
+		this.handleChange = this.handleChange.bind(this);
+		this.handleChangeDropDown = this.handleChangeDropDown.bind(this);
+		this.state = {
+			id: this.props.id,
+		};
 
-		<div className="container">
-			<div className="labelStyle"><label> Adjective:</label></div>
-			<div className="inputStyle">
-			<Dropdown options = {this.props.options} onChange = {this.handleChange} value = {this.props.adjective} placeholder = "Select an adjective" ></Dropdown>
-			</div>
-			{/* <input type={Text} value={this.props.adjective} /></div> */}
-		</div>	
+	}
+	handleClick = event => {
+		console.log('Clicked');
+	}
 
-		<div className="descriptionContainer">
-			<div className="labelStyle"><label> Description:</label></div>
-			<div className="desInputStyle"> <textarea onDrag = {false} rows = {5} value={this.props.description} /></div>
-		</div>	
+	handleChange = (event) => {
+		const { target: { name, value } } = event;
+		this.setState(() => ({ name: value }))
+	}
+	handleChangeDropDown = event => {
+		console.log('Changed');
+	}
+	render() {
+		const { classes } = this.props;
 
-		<div className="buttonDivStyle">
-			<Button color = "secondary" variant ='contained' className="buttonStyle"  onClick = {this.handleClick}> Done</Button>
-		</div>
-		</div>
-		</MuiThemeProvider>
+		return (
+			<Card className={classes.card}>
+				<CardContent className={classes.content}>
+				<Grid container direction="column" spacing={24}>
+						<Grid item>
+								<div className="labelStyle">
+									<Typography variant="h6" color="textPrimary" className={classes.text} >
+											Rank
+									</Typography>
+								</div>
+								<div className="inputStyle">
+									<Input
+										required
+										name="Rank"
+										value={this.props.rank}
+										onChange={this.handleChange}
+										margin="normal"
+									/>
+								</div>
+						</Grid>
+						<Grid item>
+								<div className="labelStyle">
+									<Typography variant="h6" color="textPrimary" className={classes.text} >
+										Token
+									</Typography>
+								</div>
+								<div className="inputStyle">
+									<Input
+										required
+										name="Token"
+										value={this.props.token}
+										onChange={this.handleChange}
+										margin="normal"
+									/>
+								</div>
+						</Grid>
+						<Grid item>
+								<div className="labelStyle">
+									<Typography variant="h6" color="textPrimary" className={classes.text} >
+										Adjective
+									</Typography>
+								</div>
+								<div className="inputStyle">
+									<Dropdown  options={this.props.options} onChange={this.handleChangeDropDown} value={this.props.adjective} placeholder="Select an adjective" ></Dropdown>
+								</div>
+						</Grid>
+						<Grid item>
+								<div className="labelStyle">
+									<Typography variant="h6" color="textPrimary" className={classes.text} >
+										Description
+									</Typography>
+								</div>
+								<div className="inputStyle">
+									<TextField
+										required
+										id="outlined-textarea"
+										multiline
+										variant="outlined"
+										name="Description"
+										value ={this.props.description}
+										onChange={this.handleChange}
+										margin ="normal"
+										multiline={true}
+										rows={4}
+										rowsMax={5}
+									/>
+								</div>
+						</Grid>
+					</Grid>
+				</CardContent>
+				<CardActions className={classes.actions}>
+					<Button color="secondary" variant='contained' className="buttonStyle" onClick={this.handleClick}> Done</Button>
+				</CardActions>
+			</Card>
 		);
-}
+	}
 
 }
+Detail.propTypes = {
+	classes: PropTypes.object.isRequired,
+};
 
-export default Detail;
+export default withStyles(styles)(Detail);

@@ -1,36 +1,63 @@
 import React, { Component } from "react";
-import Tile from './Tile';
+import PropTypes from 'prop-types';
+import { withStyles } from '@material-ui/core/styles';
 import Detail from './Detail';
-import Dropdown from 'react-dropdown';
+import ButtonAppBar from './ButtonAppBar';
 import './MainPage.css';
 import axios from 'axios';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+import muiTheme from './Theme.js';
+import { MuiThemeProvider } from '@material-ui/core/styles';
+import Typography from '@material-ui/core/Typography';
+import List from '@material-ui/core/List';
+import Grid from '@material-ui/core/Grid';
+import Tile from './Tile'
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
+
+
+const styles = theme => ({
+	listRoot: {
+		width: '100%',
+		maxWidth: '360px',
+		backgroundColor: theme.palette.background.paper,
+		height: '100%',
+	},
+	gridRoot: {
+		marginLeft: '5%',
+	},
+	card: {
+		height: '90%',
+		overflowY: 'auto',
+	}
+
+});
 
 class MainPage extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
 			data: [
-				{ rank: 1, name: 'Rohan Kasture', token: '50', adjective: 'Brilliant', description: 'Best', userId: 'rkasture' },
-				{ rank: 2, name: 'Praneta Paithankar', token: '50', adjective: 'Friendly', description: 'Good', userId: 'ppaithan' },
-				{ rank: 3, name: 'Rocco Manzo', token: '30', adjective: 'Smart', description: 'Pokemon player', userId: 'rmanzo' },
-				{ rank: 4, name: 'Shradha Baranwal', token: '30', adjective: 'Energetic', description: 'Smart', userId: 'sbaranwa' },
-				{ rank: 5, name: 'Murtaza Khambaty', token: '10', adjective: 'Professional', description: 'Workaholic', userId: 'mkhambaty' }
-				
+				{ rank: 1, initials: 'RK', name: 'Rohan Kasture', token: '50', adjective: 'Brilliant', description: 'Best', userId: 'rkasture' },
+				{ rank: 2, initials: 'PP', name: 'Praneta Paithankar', token: '50', adjective: 'Friendly', description: 'Good', userId: 'ppaithan' },
+				{ rank: 3, initials: 'RM', name: 'Rocco Manzo', token: '30', adjective: 'Smart', description: 'Pokemon player', userId: 'rmanzo' },
+				{ rank: 4, initials: 'SB', name: 'Shradha Baranwal', token: '30', adjective: 'Energetic', description: 'Smart', userId: 'sbaranwa' },
+				{ rank: 5, initials: 'MK', name: 'Murtaza Khambaty', token: '10', adjective: 'Professional', description: 'Workaholic', userId: 'mkhambaty' },
+
 			],
 			selected: {},
 			options: [
 				{
-				 type: 'group', name: 'Good Adjectives', items: [
-				   { value: 'three', label: 'Brilliant' },
-				   { value: 'four', label: 'Professional' }
-				 ]
+					type: 'group', name: 'Good Adjectives', items: [
+						{ value: 'three', label: 'Brilliant' },
+						{ value: 'four', label: 'Professional' }
+					]
 				},
 				{
-				 type: 'group', name: 'Bad Adjectives', items: [
-				   { value: 'five', label: 'Unreliable' },
-				   { value: 'six', label: 'Useless' }
-				 ]
+					type: 'group', name: 'Bad Adjectives', items: [
+						{ value: 'five', label: 'Unreliable' },
+						{ value: 'six', label: 'Useless' }
+					]
 				}
 			]
 		};
@@ -61,12 +88,12 @@ class MainPage extends Component {
 		const [removed] = result.splice(startIndex, 1);
 		result.splice(endIndex, 0, removed);
 
-		
-		var mapUser = result.map((user, index) =>{ 
+
+		var mapUser = result.map((user, index) => {
 			user.rank = index + 1
 			return user;
-		 });
-		
+		});
+
 		this.handleOnClick(startIndex);
 		return mapUser;
 	};
@@ -88,49 +115,119 @@ class MainPage extends Component {
 	};
 
 	render() {
-
+		const { classes } = this.props;
 		return (
-			<div>
-				<h1>Hello FirstName LastName</h1>
-			<div className="mContainer">	
-				{/* iterate through data and show tile */}
-				<div className="nameDivStyle">
-					<DragDropContext onDragEnd={this.onDragEnd}>
-						<Droppable droppableId="droppable">
-							{
-								(provided, snapshot) => (
-								<div className="scrollable"
-									ref={provided.innerRef}>
-									{this.state.data.map((user, index) => (
-										<Draggable key={user.userId} draggableId={user.userId} index={index}>
-											{(provided, snapshot) => (
-												<div className ="liststyle" 
-													ref={provided.innerRef}
-													{...provided.draggableProps}
-													{...provided.dragHandleProps}>
-													<Tile name={user.name} onClick={()=>this.handleOnClick(index)}/>
-												</div>
-											)}
-										</Draggable>
-									))}
-									{provided.placeholder}
-								</div>
-							)}
-						</Droppable>
+			<MuiThemeProvider theme={muiTheme}>
+				<ButtonAppBar />
+				<br />
+				<Grid container direction="column" justify="flex-start" alignItems="" spacing="40">
+					<Grid item direction="row" justify="center" alignItems="center" >
+
+						<Typography variant="h4" color="textPrimary" >
+							Hello FirstName LastName
+						</Typography>
+
+					</Grid>
+
+					<Grid item className={classes.gridRoot} direction="row" justify="center" alignItems="" alignContent="center">
+						<Grid container direction="row" justify="" alignItems="" alignContent="center" spacing={40}>
+
+							<Grid item direction="row" justify="center" alignItems="flex-start">
+								<Card className={classes.card}>
+									<CardContent>
+										<DragDropContext onDragEnd={this.onDragEnd}>
+											<Droppable droppableId="droppable">
+												{
+													(provided, snapshot) => (
+														<div
+															ref={provided.innerRef}>
+																<List className={classes.listRoot} component="nav">
+																	{this.state.data.map((user, index) => (
+																		<Draggable key={user.userId} draggableId={user.userId} index={index}>
+																			{(provided, snapshot) => (
+																				<div
+																					ref={provided.innerRef}
+																					{...provided.draggableProps}
+																					{...provided.dragHandleProps}>
+																					<Tile name={user.name} initials={user.initials} onClick={() => this.handleOnClick(index)} />
+																				</div>
+																			)}
+																		</Draggable>
+																	))}
+																	{provided.placeholder}
+																</List>
+														</div>
+													)}
+											</Droppable>
+										</DragDropContext>
+									</CardContent>
+								</Card>
+							</Grid>
+							<Grid item className={classes.cardGrid} direction="row" justify="center" alignItems="center">
+								<Detail options={this.state.options} rank={this.state.selected.rank} name={this.state.selected.name} token={this.state.selected.token} adjective={this.state.selected.adjective} description={this.state.selected.description} />
+							</Grid>
+						</Grid>
 
 
-					</DragDropContext>
+					</Grid>
 
-				</div>
-				<div className="detailStyle">
-					<div>
-						{/* give selected item properties to the details view */}
-						<Detail options={this.state.options} rank={this.state.selected.rank} name={this.state.selected.name} token={this.state.selected.token} adjective={this.state.selected.adjective} description={this.state.selected.description} />
-					</div>
-				</div>
-			</div>
-			</div>
+				</Grid>
+			</MuiThemeProvider>
 		);
 	}
 }
-export default MainPage;
+MainPage.propTypes = {
+	classes: PropTypes.object.isRequired,
+};
+
+export default withStyles(styles)(MainPage);
+
+
+// <div>
+// 					<ButtonAppBar />
+// 					<br />
+// 					<Typography variant="h4" color="textPrimary" >
+// 						Hello FirstName LastName
+// 				</Typography>
+// 					<div >
+// 						{/* iterate through data and show tile */}
+// 						<div >
+// 							<DragDropContext onDragEnd={this.onDragEnd}>
+// 								<Droppable droppableId="droppable">
+// 									{
+// 										(provided, snapshot) => (
+// 											<div className="scrollable"
+// 												ref={provided.innerRef}>
+// 												<List className={classes.root} component="nav">
+// 													{this.state.data.map((user, index) => (
+// 														<Draggable key={user.userId} draggableId={user.userId} index={index}>
+// 															{(provided, snapshot) => (
+
+// 																<div 
+// 																	ref={provided.innerRef}
+// 																	{...provided.draggableProps}
+// 																	{...provided.dragHandleProps}>
+// 																	<Tile name={user.name}  initials={user.initials} onClick={() => this.handleOnClick(index)} />
+// 																</div>
+// 															)}
+// 														</Draggable>
+// 													))}
+// 												{provided.placeholder}
+// 												</List>
+
+// 											</div>
+// 										)}
+// 								</Droppable>
+
+
+// 							</DragDropContext>
+
+// 						</div>
+// 						<div className="detailStyle">
+// 							<div>
+// 								{/* give selected item properties to the details view */}
+// 								<Detail options={this.state.options} rank={this.state.selected.rank} name={this.state.selected.name} token={this.state.selected.token} adjective={this.state.selected.adjective} description={this.state.selected.description} />
+// 							</div>
+// 						</div>
+// 					</div>
+// 				</div>

@@ -27,7 +27,7 @@
   }
   .scrollable{
     overflow-y: scroll;
-    height: 400px;
+    height: 100%;
   }
   .liststyle{
     display: flex;

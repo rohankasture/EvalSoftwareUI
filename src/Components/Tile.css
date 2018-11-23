@@ -1,6 +1,9 @@
 .nameStyle{
     display: inline-block;
-    border-radius: 10px; 
-    border: 1.5px solid black;
+    /* border: 1.5px solid black; */
     width: 70%;
 }
+/* .color{
+    height: 30%;
+    background-color:#00838f;
+} */

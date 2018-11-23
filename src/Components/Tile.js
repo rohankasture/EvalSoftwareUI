@@ -1,14 +1,21 @@
 import React, { Component } from "react";
 import "./Tile.css";
-import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
-import muiTheme from './Theme.js';
-// const theme = createMuiTheme({
-// 	palette: {
-// 	  primary: { main: '#009688' }, // Purple and green play nicely together.
-// 	  secondary: { main: '#11cb5f' }, // This is just green.A700 as hex.
-// 	},
-//   });
+import Divider from '@material-ui/core/Divider';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
+import Avatar from '@material-ui/core/Avatar';
+import deepPurple from '@material-ui/core/colors/deepPurple';
+import { withStyles } from '@material-ui/core/styles';
+import PropTypes from 'prop-types';
+
+const styles = theme => ({
+	avatar: {
+		margin: 10,
+		color: '#fff',
+    	backgroundColor: deepPurple[500],
+	},
+  });
+
 class Tile extends Component {
 
 	constructor(props) {
@@ -26,18 +33,24 @@ class Tile extends Component {
 
 	render() {
 		const { provided, innerRef } = this.props;
+		const { classes } = this.props;
 		return (
-			<div
-				
-				onClick={this.props.onClick} className="nameStyle">
-				<MuiThemeProvider theme={muiTheme}>
-     				 <Button variant ='contained' color="primary"  fullWidth value = "rkasture" ></Button>
-					<p>{this.props.name}</p>
-				</MuiThemeProvider> 	
-			</div>
+
+			<React.Fragment>
+				<ListItem button onClick={this.props.onClick} >
+					<Avatar className={classes.avatar}>{this.props.initials}
+					</Avatar>
+					<ListItemText primary={this.props.name} />
+				</ListItem>
+				<Divider className={classes.divider} backgroundColor="#00838f" />
+			</React.Fragment>
+
 		);
 	}
 }
+Tile.propTypes = {
+	classes: PropTypes.object.isRequired,
+  };
 
-export default Tile;
+export default withStyles(styles)(Tile);
 

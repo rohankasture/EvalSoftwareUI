@@ -17,9 +17,6 @@
 
 .labelStyle{
     display: inline-block;
-    font-size: 20px;
-    font-family: 'Calibri';
-    font-weight: bold;
     width  : 15%;
     height: auto;
     vertical-align: top;
@@ -61,7 +58,6 @@
     width: 50%;
     height: auto;
     justify-self: stretch;
-    margin-left: 7%;
 }
 
 .buttonDivStyle{
@@ -79,6 +75,7 @@
 .Dropdown-root {
     position: relative;
     width: 40%;
+    min-width: 50px;
     padding-left: 150px;
   }
   
