@@ -120,7 +120,7 @@ class Detail extends Component {
 										Description
 									</Typography>
 								</div>
-								<div className="inputStyle">
+								<div className="desInputStyle">
 									<TextField
 										required
 										id="outlined-textarea"

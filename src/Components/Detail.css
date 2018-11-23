@@ -55,9 +55,8 @@
 
 .desInputStyle{
     display: inline-block;
-    width: 50%;
+    width: 60%;
     height: auto;
-    justify-self: stretch;
 }
 
 .buttonDivStyle{
@@ -76,7 +75,7 @@
     position: relative;
     width: 40%;
     min-width: 50px;
-    padding-left: 150px;
+    padding-left: 25%;
   }
   
   .Dropdown-control {
