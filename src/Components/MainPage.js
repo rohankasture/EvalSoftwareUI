@@ -45,7 +45,7 @@ class MainPage extends Component {
 				{ rank: 5, initials: 'MK', name: 'Murtaza Khambaty', token: '10', adjective: 'Professional', description: 'Workaholic', userId: 'mkhambaty' },
 
 			],
-			selected: {},
+			selected: "",
 			options: [
 				{
 					type: 'group', name: 'Good Adjectives', items: [
@@ -59,11 +59,14 @@ class MainPage extends Component {
 						{ value: 'six', label: 'Useless' }
 					]
 				}
-			]
+			],
 		};
+		this.handleDescriptionChange = this.handleDescriptionChange.bind(this);
+		this.handleTokenChange = this.handleTokenChange.bind(this);
 	}
 
 	componentWillMount() {
+		this.setState({selected:this.state.data[0]});
 		axios
 			.get(`https://localhost:55555/team/rkasture`, {
 				headers: {
@@ -80,9 +83,35 @@ class MainPage extends Component {
 
 	// handleOnClick(id) - > will set the selected property in state to the selected id from data. eg selected = data[id]
 	handleOnClick = (id) => {
+		console.log("OnClick" + id);
+		// console.log("data[id]"+ this.state.data[id].token);
 		this.setState({ selected: this.state.data[id] });
 	}
-
+	handleTokenChange = (id,token) => {
+		let selected = Object.assign({}, this.state.selected);
+		selected.token = token;
+		
+		this.setState({selected});
+		console.log({selected});
+		let data = this.state.data;
+		data[selected.rank-1].token = selected.token;
+		this.setState({data});
+		console.log({data});
+		// this.setState({data[id]:token});
+		// this.setState({selected.token:token})
+		console.log("MainPage Handle Token Change method");		
+	}
+	
+	handleDescriptionChange = (id,desc) => {
+		// const { target: { name, value } } = event;
+		//this.setState(() => ({ description: event.target.value }))
+		let newState = Object.assign({}, this.state);
+		newState.data[id].description = desc;
+		this.setState(newState);
+		console.log("MainPage handleDescriptionChange");
+	}
+	
+	
 	reorder = (list, startIndex, endIndex) => {
 		const result = Array.from(list);
 		const [removed] = result.splice(startIndex, 1);
@@ -113,6 +142,13 @@ class MainPage extends Component {
 			data,
 		});
 	};
+
+	// onUpdate = (e) => {
+	// 	console.log("On Update")
+	// 	let newState = Object.assign({}, this.state);
+	// 	newState.data[id].token = 99;
+	// 	this.setState(newState);
+	// };
 
 	render() {
 		const { classes } = this.props;
@@ -164,7 +200,11 @@ class MainPage extends Component {
 								</Card>
 							</Grid>
 							<Grid item className={classes.cardGrid} direction="row" justify="center" alignItems="center">
-								<Detail options={this.state.options} rank={this.state.selected.rank} name={this.state.selected.name} token={this.state.selected.token} adjective={this.state.selected.adjective} description={this.state.selected.description} />
+							{/* onUpdate = {this.onUpdate} */}
+								<Detail  handleTokenChange = {this.handleTokenChange}
+										 
+								options={this.state.options} rank={this.state.selected.rank} name={this.state.selected.name} token={this.state.selected.token} adjective={this.state.selected.adjective} description={this.state.selected.description} 
+								/>
 							</Grid>
 						</Grid>
 

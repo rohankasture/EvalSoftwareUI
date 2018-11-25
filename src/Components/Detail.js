@@ -47,24 +47,24 @@ class Detail extends Component {
 		/*<button  onClick = {this.handleClick}> Done</button><br/>*/
 		super(props);
 		this.handleClick = this.handleClick.bind(this);
-		this.handleChange = this.handleChange.bind(this);
 		this.handleChangeDropDown = this.handleChangeDropDown.bind(this);
 		this.state = {
 			id: this.props.id,
 		};
 
 	}
+	onUpdate = e =>{
+		// this.props.onUpdate(this.state.token);
+	}
 	handleClick = event => {
 		console.log('Clicked');
+
 	}
 
-	handleChange = (event) => {
-		const { target: { name, value } } = event;
-		this.setState(() => ({ name: value }))
-	}
 	handleChangeDropDown = event => {
 		console.log('Changed');
 	}
+
 	render() {
 		const { classes } = this.props;
 
@@ -85,6 +85,9 @@ class Detail extends Component {
 										value={this.props.rank}
 										onChange={this.handleChange}
 										margin="normal"
+										InputProps={{
+											readOnly: true,
+										  }}
 									/>
 								</div>
 						</Grid>
@@ -98,8 +101,8 @@ class Detail extends Component {
 									<Input
 										required
 										name="Token"
-										value={this.props.token}
-										onChange={this.handleChange}
+										value = {this.props.token}
+										onChange={(event) => this.props.handleTokenChange(this.state.id,event.target.value)}
 										margin="normal"
 									/>
 								</div>
@@ -111,7 +114,7 @@ class Detail extends Component {
 									</Typography>
 								</div>
 								<div className="inputStyle">
-									<Dropdown  options={this.props.options} onChange={this.handleChangeDropDown} value={this.props.adjective} placeholder="Select an adjective" ></Dropdown>
+									<Dropdown  options={this.props.options} onChange={this.handleChangeDropDown} value={this.state.adjective} placeholder="Select an adjective" ></Dropdown>
 								</div>
 						</Grid>
 						<Grid item>
@@ -128,7 +131,7 @@ class Detail extends Component {
 										variant="outlined"
 										name="Description"
 										value ={this.props.description}
-										onChange={this.handleChange}
+										onChange={(event) => this.props.handleDescriptionChange(this.props.id,event.target.value)}
 										margin ="normal"
 										multiline={true}
 										rows={4}
