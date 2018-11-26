@@ -24,6 +24,7 @@ class App extends Component {
           />
           <Route
             exact={true}
+            // path="/mainpage/:email"
             path="/mainpage"
             render={() => (
               <div className="App">

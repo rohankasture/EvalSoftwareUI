@@ -38,13 +38,15 @@ class LoginPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-  
+      
     };
     this.handleSearch = this.handleSearch.bind(this);
   }
 
-  handleSearch = event =>{
-    event.preventDefault();
+  handleSearch = ()  =>{
+    // event.preventDefault();
+    // alert(user);
+    console.log("Hello");
     window.location.assign('/mainpage');
   };
 
@@ -81,7 +83,7 @@ class LoginPage extends Component {
               <div className="divStyle">
                   <Button
                     onClick = {this.handleSearch}
-                    type="submit"
+                    // type="submit"
                     className="btn btn-primary mb-2 btn-color"
                     color = 'primary'
                     variant ='contained'

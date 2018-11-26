@@ -63,6 +63,7 @@ class MainPage extends Component {
 		};
 		this.handleDescriptionChange = this.handleDescriptionChange.bind(this);
 		this.handleTokenChange = this.handleTokenChange.bind(this);
+		this.handleDone = this.handleDone.bind(this);
 	}
 
 	componentWillMount() {
@@ -83,32 +84,25 @@ class MainPage extends Component {
 
 	// handleOnClick(id) - > will set the selected property in state to the selected id from data. eg selected = data[id]
 	handleOnClick = (id) => {
-		console.log("OnClick" + id);
-		// console.log("data[id]"+ this.state.data[id].token);
 		this.setState({ selected: this.state.data[id] });
 	}
-	handleTokenChange = (id,token) => {
+	handleTokenChange = (token) => {
 		let selected = Object.assign({}, this.state.selected);
 		selected.token = token;
-		
 		this.setState({selected});
-		console.log({selected});
+	}
+	handleDone = () =>{
 		let data = this.state.data;
-		data[selected.rank-1].token = selected.token;
+		data[this.state.selected.rank-1] = this.state.selected;
 		this.setState({data});
-		console.log({data});
-		// this.setState({data[id]:token});
-		// this.setState({selected.token:token})
-		console.log("MainPage Handle Token Change method");		
 	}
 	
-	handleDescriptionChange = (id,desc) => {
+	handleDescriptionChange = (description) => {
 		// const { target: { name, value } } = event;
 		//this.setState(() => ({ description: event.target.value }))
-		let newState = Object.assign({}, this.state);
-		newState.data[id].description = desc;
-		this.setState(newState);
-		console.log("MainPage handleDescriptionChange");
+		let selected = Object.assign({}, this.state.selected);
+		selected.description = description;
+		this.setState({selected});
 	}
 	
 	
@@ -143,13 +137,6 @@ class MainPage extends Component {
 		});
 	};
 
-	// onUpdate = (e) => {
-	// 	console.log("On Update")
-	// 	let newState = Object.assign({}, this.state);
-	// 	newState.data[id].token = 99;
-	// 	this.setState(newState);
-	// };
-
 	render() {
 		const { classes } = this.props;
 		return (
@@ -160,7 +147,8 @@ class MainPage extends Component {
 					<Grid item direction="row" justify="center" alignItems="center" >
 
 						<Typography variant="h4" color="textPrimary" >
-							Hello FirstName LastName
+							{/* Hello {this.props.params.email} */}
+							Hello!
 						</Typography>
 
 					</Grid>
@@ -200,17 +188,14 @@ class MainPage extends Component {
 								</Card>
 							</Grid>
 							<Grid item className={classes.cardGrid} direction="row" justify="center" alignItems="center">
-							{/* onUpdate = {this.onUpdate} */}
 								<Detail  handleTokenChange = {this.handleTokenChange}
-										 
+										 handleDescriptionChange = {this.handleDescriptionChange}						
+										 handleDone = {this.handleDone} 
 								options={this.state.options} rank={this.state.selected.rank} name={this.state.selected.name} token={this.state.selected.token} adjective={this.state.selected.adjective} description={this.state.selected.description} 
 								/>
 							</Grid>
 						</Grid>
-
-
 					</Grid>
-
 				</Grid>
 			</MuiThemeProvider>
 		);
@@ -223,51 +208,3 @@ MainPage.propTypes = {
 export default withStyles(styles)(MainPage);
 
 
-// <div>
-// 					<ButtonAppBar />
-// 					<br />
-// 					<Typography variant="h4" color="textPrimary" >
-// 						Hello FirstName LastName
-// 				</Typography>
-// 					<div >
-// 						{/* iterate through data and show tile */}
-// 						<div >
-// 							<DragDropContext onDragEnd={this.onDragEnd}>
-// 								<Droppable droppableId="droppable">
-// 									{
-// 										(provided, snapshot) => (
-// 											<div className="scrollable"
-// 												ref={provided.innerRef}>
-// 												<List className={classes.root} component="nav">
-// 													{this.state.data.map((user, index) => (
-// 														<Draggable key={user.userId} draggableId={user.userId} index={index}>
-// 															{(provided, snapshot) => (
-
-// 																<div 
-// 																	ref={provided.innerRef}
-// 																	{...provided.draggableProps}
-// 																	{...provided.dragHandleProps}>
-// 																	<Tile name={user.name}  initials={user.initials} onClick={() => this.handleOnClick(index)} />
-// 																</div>
-// 															)}
-// 														</Draggable>
-// 													))}
-// 												{provided.placeholder}
-// 												</List>
-
-// 											</div>
-// 										)}
-// 								</Droppable>
-
-
-// 							</DragDropContext>
-
-// 						</div>
-// 						<div className="detailStyle">
-// 							<div>
-// 								{/* give selected item properties to the details view */}
-// 								<Detail options={this.state.options} rank={this.state.selected.rank} name={this.state.selected.name} token={this.state.selected.token} adjective={this.state.selected.adjective} description={this.state.selected.description} />
-// 							</div>
-// 						</div>
-// 					</div>
-// 				</div>

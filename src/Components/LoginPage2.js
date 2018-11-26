@@ -12,10 +12,39 @@ import LockIcon from '@material-ui/icons/LockOutlined';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
-
+import axios from 'axios';
+let uname = {};
 function handleSearch(event){
     event.preventDefault();
-    window.location.assign('/mainpage');
+    // window.location.assign('/mainpage');
+    const formData = {};
+    // for (const field in innerRef) {
+    //   formData[field] = innerRef[field].value;
+    // }    
+    console.log(uname);
+    alert(uname);
+    var loginData = {};
+    // loginData["email"] = formData["email"];; //pass INPUT value
+    // loginData["password"] = formData["password"];
+    axios
+      .post("https://localhost:55555/login", loginData, {
+            headers: {
+              "Content-Type": "application/json",
+              "Access-Control-Allow-Origin": "*",
+              crossDomain: true
+            }
+          })
+          .then(
+            function(res) {
+              console.log(res);
+              window.location.assign('/mainpage');
+            }.bind(this)
+          )
+          .catch(function(err) {
+            alert("Invalid credentials");
+            console.log(err);
+          });
+        event.target.reset();
   };
   
 const styles = theme => ({
@@ -50,10 +79,12 @@ const styles = theme => ({
   },
 });
 
+let isSubmitted = false;
+
 
 function SignIn(props) {
   const { classes } = props;
-
+  // const {isSubmitted}  = this.state;
   return (
     <main className={classes.main}>
     <h2>Welcome to CSCI-P 532/632 Evaluation Software</h2>
@@ -68,11 +99,11 @@ function SignIn(props) {
         <form className={classes.form}>
           <FormControl margin="normal" required fullWidth>
             <InputLabel htmlFor="email">Email Address</InputLabel>
-            <Input id="email" name="email" autoComplete="email" autoFocus />
+            <Input id="email" innerRef = {e1 => uname = e1} name="email" autoComplete="email" autoFocus />
           </FormControl>
           <FormControl margin="normal" required fullWidth>
             <InputLabel htmlFor="password">Password</InputLabel>
-            <Input name="password" type="password" id="password" autoComplete="current-password" />
+            <Input name="password"  type="password" id="password" autoComplete="current-password" />
           </FormControl>
           {/* <FormControlLabel
             control={<Checkbox value="remember" color="primary" />}

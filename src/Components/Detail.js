@@ -44,7 +44,6 @@ const styles = theme => ({
 
 class Detail extends Component {
 	constructor(props) {
-		/*<button  onClick = {this.handleClick}> Done</button><br/>*/
 		super(props);
 		this.handleClick = this.handleClick.bind(this);
 		this.handleChangeDropDown = this.handleChangeDropDown.bind(this);
@@ -53,12 +52,8 @@ class Detail extends Component {
 		};
 
 	}
-	onUpdate = e =>{
-		// this.props.onUpdate(this.state.token);
-	}
 	handleClick = event => {
-		console.log('Clicked');
-
+		console.log('Clicked1');
 	}
 
 	handleChangeDropDown = event => {
@@ -102,7 +97,7 @@ class Detail extends Component {
 										required
 										name="Token"
 										value = {this.props.token}
-										onChange={(event) => this.props.handleTokenChange(this.state.id,event.target.value)}
+										onChange={(event) => this.props.handleTokenChange(event.target.value)}
 										margin="normal"
 									/>
 								</div>
@@ -131,7 +126,7 @@ class Detail extends Component {
 										variant="outlined"
 										name="Description"
 										value ={this.props.description}
-										onChange={(event) => this.props.handleDescriptionChange(this.props.id,event.target.value)}
+										onChange={(event) => this.props.handleDescriptionChange(event.target.value)}
 										margin ="normal"
 										multiline={true}
 										rows={4}
@@ -142,12 +137,11 @@ class Detail extends Component {
 					</Grid>
 				</CardContent>
 				<CardActions className={classes.actions}>
-					<Button color="secondary" variant='contained' className="buttonStyle" onClick={this.handleClick}> Done</Button>
+					<Button color="secondary" variant='contained' className="buttonStyle" onClick={this.props.handleDone}> Done</Button>
 				</CardActions>
 			</Card>
 		);
 	}
-
 }
 Detail.propTypes = {
 	classes: PropTypes.object.isRequired,
