@@ -82,8 +82,13 @@ class Login extends Component {
       })
       .then(
         function (res) {
-          console.log(res);
-          window.location.assign('/mainpage');
+          // console.log(res['data']['status_code']);
+          if( res['data']['status_code'] != 200){
+            alert("Invalid credentials");  
+            window.location.assign('/');  
+          }  
+          else          
+            window.location.assign('/mainpage');
         }.bind(this)
       )
       .catch(function (err) {
