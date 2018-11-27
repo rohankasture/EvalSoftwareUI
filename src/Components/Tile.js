@@ -38,7 +38,7 @@ class Tile extends Component {
 
 			<React.Fragment>
 				<ListItem button onClick={this.props.onClick} >
-					<Avatar className={classes.avatar}>{this.props.initials}
+					<Avatar className={classes.avatar}>{this.props.rank}
 					</Avatar>
 					<ListItemText primary={this.props.name} />
 				</ListItem>

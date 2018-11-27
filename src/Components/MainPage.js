@@ -184,7 +184,7 @@ class MainPage extends Component {
 																					ref={provided.innerRef}
 																					{...provided.draggableProps}
 																					{...provided.dragHandleProps}>
-																					<Tile name={user.name} initials={user.initials} onClick={() => this.handleOnClick(index)} />
+																					<Tile name={user.name} initials={user.initials} rank ={user.rank} onClick={() => this.handleOnClick(index)} />
 																				</div>
 																			)}
 																		</Draggable>
