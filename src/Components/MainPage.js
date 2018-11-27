@@ -150,6 +150,7 @@ class MainPage extends Component {
 
 	render() {
 		const { classes } = this.props;
+		var name = localStorage.getItem('name');
 		return (
 			<MuiThemeProvider theme={muiTheme}>
 				<ButtonAppBar />
@@ -157,9 +158,8 @@ class MainPage extends Component {
 				<Grid container direction="column" justify="flex-start" alignItems="" spacing="40">
 					<Grid item direction="row" justify="center" alignItems="center" >
 
-						<Typography variant="h4" color="textPrimary" >
-							{/* Hello {this.props.params.email} */}
-							Hello Praneta Paithankar!
+						<Typography variant="h4" color="textPrimary">
+							Hello {name}
 						</Typography>
 
 					</Grid>

@@ -87,8 +87,12 @@ class Login extends Component {
             alert("Invalid credentials");  
             window.location.assign('/');  
           }  
-          else          
+          else {
+            let name = res['data']['first_name'] + ' ' + res['data']['last_name'] + '!'
+            localStorage.setItem('name',name);   
             window.location.assign('/mainpage');
+          
+          }
         }.bind(this)
       )
       .catch(function (err) {
