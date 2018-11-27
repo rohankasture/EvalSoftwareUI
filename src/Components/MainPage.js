@@ -14,6 +14,7 @@ import Grid from '@material-ui/core/Grid';
 import Tile from './Tile'
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
+import Button from '@material-ui/core/Button';
 
 
 const styles = theme => ({
@@ -38,12 +39,13 @@ class MainPage extends Component {
 		super(props);
 		this.state = {
 			data: [
-				{ rank: 1, initials: 'RK', name: 'Rohan Kasture', token: '50', adjective: 'Brilliant', description: 'Best', userId: 'rkasture' },
-				{ rank: 2, initials: 'PP', name: 'Praneta Paithankar', token: '50', adjective: 'Friendly', description: 'Good', userId: 'ppaithan' },
-				{ rank: 3, initials: 'RM', name: 'Rocco Manzo', token: '30', adjective: 'Smart', description: 'Pokemon player', userId: 'rmanzo' },
-				{ rank: 4, initials: 'SB', name: 'Shradha Baranwal', token: '30', adjective: 'Energetic', description: 'Smart', userId: 'sbaranwa' },
-				{ rank: 5, initials: 'MK', name: 'Murtaza Khambaty', token: '10', adjective: 'Professional', description: 'Workaholic', userId: 'mkhambaty' },
-
+				{ rank: 1, initials: 'RK', name: 'Rohan Kasture', token: '', adjective: '', description: '', userId: 'rkasture' },
+				{ rank: 2, initials: 'AA', name: 'Ankita Alshi', token: '', adjective: '', description: '', userId: 'aralshi' },
+				{ rank: 3, initials: 'RM', name: 'Rocco Manzo', token: '', adjective: '', description: '', userId: 'rmanzo' },
+				{ rank: 4, initials: 'SB', name: 'Shradha Baranwal', token: '', adjective: '', description: '', userId: 'sbaranwa' },
+				{ rank: 5, initials: 'RD', name: 'Ramya DG', token: '', adjective: '', description: '', userId: 'ramyaDG' },
+				{ rank: 6, initials: 'SK', name: 'Shweta Kulkarni', token: '', adjective: '', description: '', userId: 'svkul' },
+				
 			],
 			selected: "",
 			options: [
@@ -91,6 +93,12 @@ class MainPage extends Component {
 		selected.token = token;
 		this.setState({selected});
 	}
+	handleAdjectiveChange = (adjective) => {
+		let selected = Object.assign({}, this.state.selected);
+		selected.adjective = adjective;
+		this.setState({selected});
+	}
+
 	handleDone = () =>{
 		let data = this.state.data;
 		data[this.state.selected.rank-1] = this.state.selected;
@@ -121,6 +129,9 @@ class MainPage extends Component {
 		return mapUser;
 	};
 
+	handleSubmit = (event)=>{
+			console.log(event)
+	};
 	onDragEnd = (result) => {
 		if (!result.destination) {
 			return;
@@ -148,7 +159,7 @@ class MainPage extends Component {
 
 						<Typography variant="h4" color="textPrimary" >
 							{/* Hello {this.props.params.email} */}
-							Hello!
+							Hello Praneta Paithankar!
 						</Typography>
 
 					</Grid>
@@ -191,10 +202,14 @@ class MainPage extends Component {
 								<Detail  handleTokenChange = {this.handleTokenChange}
 										 handleDescriptionChange = {this.handleDescriptionChange}						
 										 handleDone = {this.handleDone} 
+										 handleAdjectiveChange = {this.handleAdjectiveChange}
 								options={this.state.options} rank={this.state.selected.rank} name={this.state.selected.name} token={this.state.selected.token} adjective={this.state.selected.adjective} description={this.state.selected.description} 
 								/>
 							</Grid>
 						</Grid>
+					</Grid>
+					<Grid item direction="row" justify="center" alignItems="center" >
+						<Button color="primary" variant='contained' className="buttonStyle" onClick={this.handleSubmit}> Submit</Button>
 					</Grid>
 				</Grid>
 			</MuiThemeProvider>

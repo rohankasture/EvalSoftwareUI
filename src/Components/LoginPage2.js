@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
@@ -13,40 +13,7 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
 import axios from 'axios';
-let uname = {};
-function handleSearch(event){
-    event.preventDefault();
-    // window.location.assign('/mainpage');
-    const formData = {};
-    // for (const field in innerRef) {
-    //   formData[field] = innerRef[field].value;
-    // }    
-    console.log(uname);
-    alert(uname);
-    var loginData = {};
-    // loginData["email"] = formData["email"];; //pass INPUT value
-    // loginData["password"] = formData["password"];
-    axios
-      .post("https://localhost:55555/login", loginData, {
-            headers: {
-              "Content-Type": "application/json",
-              "Access-Control-Allow-Origin": "*",
-              crossDomain: true
-            }
-          })
-          .then(
-            function(res) {
-              console.log(res);
-              window.location.assign('/mainpage');
-            }.bind(this)
-          )
-          .catch(function(err) {
-            alert("Invalid credentials");
-            console.log(err);
-          });
-        event.target.reset();
-  };
-  
+
 const styles = theme => ({
   main: {
     width: 'auto',
@@ -79,54 +46,97 @@ const styles = theme => ({
   },
 });
 
-let isSubmitted = false;
+class Login extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      username: "",
+      password: ""
+    }
+    this.handleSearch = this.handleSearch.bind(this)
+    this.handleChangeUserName = this.handleChangeUserName.bind(this)
+    this.handleChangePassword = this.handleChangePassword.bind(this)
+  }
+  handleChangeUserName(event) {
+    this.setState({ username: event.target.value });
+  }
+  handleChangePassword(event) {
+    this.setState({ password: event.target.value });
+  }
+  handleSearch = (event) => {
+    event.preventDefault();
+    const username = this.state.username;
+    const password = this.state.password;
+    console.log(username +"" + password)
+    var loginData = {
+      "username": username,
+      "password": password
+    };
+    axios
+      .post("https://localhost:55555/login", loginData, {
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*",
+          crossDomain: true
+        }
+      })
+      .then(
+        function (res) {
+          console.log(res);
+          window.location.assign('/mainpage');
+        }.bind(this)
+      )
+      .catch(function (err) {
+        alert("Invalid credentials");
+        console.log(err);
+      });
 
-
-function SignIn(props) {
-  const { classes } = props;
-  // const {isSubmitted}  = this.state;
-  return (
-    <main className={classes.main}>
-    <h2>Welcome to CSCI-P 532/632 Evaluation Software</h2>
-      <CssBaseline />
-      <Paper className={classes.paper}>
-        <Avatar className={classes.avatar}>
-          <LockIcon />
-        </Avatar>
-        <Typography component="h1" variant="h5">
-          Sign in
-        </Typography>
-        <form className={classes.form}>
-          <FormControl margin="normal" required fullWidth>
-            <InputLabel htmlFor="email">Email Address</InputLabel>
-            <Input id="email" innerRef = {e1 => uname = e1} name="email" autoComplete="email" autoFocus />
-          </FormControl>
-          <FormControl margin="normal" required fullWidth>
-            <InputLabel htmlFor="password">Password</InputLabel>
-            <Input name="password"  type="password" id="password" autoComplete="current-password" />
-          </FormControl>
-          {/* <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
-            label="Remember me"
-          /> */}
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="primary"
-            onClick = {handleSearch}
-            className={classes.submit}
-          >
+  };
+  render() {
+    const { classes } = this.props;
+    return (
+      <main className={classes.main}>
+        <h2>Welcome to CSCI-P 532/632 Evaluation Software</h2>
+        <CssBaseline />
+        <Paper className={classes.paper}>
+          <Avatar className={classes.avatar}>
+            <LockIcon />
+          </Avatar>
+          <Typography component="h1" variant="h5">
             Sign in
-          </Button>
-        </form>
-      </Paper>
-    </main>
-  );
+          </Typography>
+          <form className={classes.form}>
+            <FormControl margin="normal" required fullWidth>
+              <InputLabel htmlFor="email">IU Username</InputLabel>
+              <Input id="email" value={this.state.username} name="email" autoComplete="email" autoFocus onChange={this.handleChangeUserName} />
+            </FormControl>
+            <FormControl margin="normal" required fullWidth>
+              <InputLabel htmlFor="password">Password</InputLabel>
+              <Input name="password" value={this.state.password} type="password" id="password" autoComplete="current-password" onChange={this.handleChangePassword} />
+            </FormControl>
+            {/* <FormControlLabel
+              control={<Checkbox value="remember" color="primary" />}
+              label="Remember me"
+            /> */}
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              color="primary"
+              onClick={(event) => this.handleSearch(event)}
+              className={classes.submit}
+            >
+              Sign in
+            </Button>
+          </form>
+        </Paper>
+      </main>
+    );
+  }
 }
 
-SignIn.propTypes = {
+Login.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(SignIn);
+export default withStyles(styles)(Login);

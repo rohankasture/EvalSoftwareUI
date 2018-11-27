@@ -26,7 +26,7 @@ class App extends Component {
             exact={true}
             // path="/mainpage/:email"
             path="/mainpage"
-            render={() => (
+            render={(res) => (       
               <div className="App">
                 <MainPage/>
               </div>

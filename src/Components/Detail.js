@@ -24,7 +24,7 @@ const styles = theme => ({
 	},
 	actions: {
 		display: 'flex',
-		justifyContent: 'center',
+		justifyContent: 'flex-end',
 	},
 	button: {
 		marginTop: theme.spacing.unit * 3,
@@ -109,7 +109,7 @@ class Detail extends Component {
 									</Typography>
 								</div>
 								<div className="inputStyle">
-									<Dropdown  options={this.props.options} onChange={this.handleChangeDropDown} value={this.state.adjective} placeholder="Select an adjective" ></Dropdown>
+									<Dropdown  options={this.props.options} onChange={this.props.handleAdjectiveChange} value={this.props.adjective} placeholder="Select an adjective" ></Dropdown>
 								</div>
 						</Grid>
 						<Grid item>
