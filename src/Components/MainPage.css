@@ -33,3 +33,6 @@
     display: flex;
     justify-content: right;     
 }
+.tile{
+    background-color: blueviolet;
+}

@@ -14,6 +14,18 @@ const styles = theme => ({
 		color: '#fff',
     	backgroundColor: deepPurple[500],
 	},
+
+	tilecolor: {
+		margin: 10,
+		color: '#fff',
+    	backgroundColor: "#fff",
+	},
+
+	tilecolor2: {
+		margin: 10,
+		color: '#fff',
+    	backgroundColor: "#00838f",
+	},
   });
 
 class Tile extends Component {
@@ -36,21 +48,20 @@ class Tile extends Component {
 		const { classes } = this.props;
 		return (
 
-			<React.Fragment>
-				<ListItem button onClick={this.props.onClick} >
+			<React.Fragment> 
+				<ListItem className= {(this.props.id == this.props.selected_id)?classes.tilecolor2:classes.tilecolor} button onClick={this.props.onClick} >
 					<Avatar className={classes.avatar}>{this.props.rank}
 					</Avatar>
 					<ListItemText primary={this.props.name} />
 				</ListItem>
 				<Divider className={classes.divider} backgroundColor="#00838f" />
 			</React.Fragment>
-
 		);
 	}
 }
 Tile.propTypes = {
 	classes: PropTypes.object.isRequired,
-  };
+};
 
 export default withStyles(styles)(Tile);
 
