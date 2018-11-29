@@ -39,12 +39,12 @@ class MainPage extends Component {
 		super(props);
 		this.state = {
 			data: [
-				{ rank: 1, initials: 'RK', name: 'Rohan Kasture', token: '', adjective: '', description: '', userId: 'rkasture' },
-				{ rank: 2, initials: 'AA', name: 'Ankita Alshi', token: '', adjective: '', description: '', userId: 'aralshi' },
-				{ rank: 3, initials: 'RM', name: 'Rocco Manzo', token: '', adjective: '', description: '', userId: 'rmanzo' },
-				{ rank: 4, initials: 'SB', name: 'Shradha Baranwal', token: '', adjective: '', description: '', userId: 'sbaranwa' },
-				{ rank: 5, initials: 'RD', name: 'Ramya DG', token: '', adjective: '', description: '', userId: 'ramyaDG' },
-				{ rank: 6, initials: 'SK', name: 'Shweta Kulkarni', token: '', adjective: '', description: '', userId: 'svkul' },
+				{ rank: 1, initials: 'RK', name: 'Rohan Kasture', token: '', adjective: '', description: '', userId: 'rkasture',doneFlag : false},
+				{ rank: 2, initials: 'AA', name: 'Ankita Alshi', token: '', adjective: '', description: '', userId: 'aralshi' ,doneFlag : false},
+				{ rank: 3, initials: 'RM', name: 'Rocco Manzo', token: '', adjective: '', description: '', userId: 'rmanzo',doneFlag : false },
+				{ rank: 4, initials: 'SB', name: 'Shradha Baranwal', token: '', adjective: '', description: '', userId: 'sbaranwa',doneFlag : false },
+				{ rank: 5, initials: 'RD', name: 'Ramya DG', token: '', adjective: '', description: '', userId: 'ramyaDG',doneFlag : false},
+				{ rank: 6, initials: 'SK', name: 'Shweta Kulkarni', token: '', adjective: '', description: '', userId: 'svkul' ,doneFlag : false},
 				
 			],
 			selected: "",
@@ -100,6 +100,9 @@ class MainPage extends Component {
 	}
 
 	handleDone = () =>{
+		//For Done Avatar
+		this.state.selected.doneFlag = true;
+		
 		let data = this.state.data;
 		data[this.state.selected.rank-1] = this.state.selected;
 		this.setState({data});
@@ -183,8 +186,8 @@ class MainPage extends Component {
 																				<div
 																					ref={provided.innerRef}
 																					{...provided.draggableProps}
-																					{...provided.dragHandleProps}>
-																					<Tile selected_id = {this.state.selected.rank-1} name={user.name} initials={user.initials} rank ={user.rank} id = {user.rank-1} onClick={() => this.handleOnClick(index)} />
+																					{...provided.dragHandleProps}>																			
+																					<Tile doneflag = {user.doneFlag} selected_id = {this.state.selected.rank-1} name={user.name} initials={user.initials} rank ={user.rank} id = {user.rank-1} onClick={() => this.handleOnClick(index)} />
 																				</div>
 																			)}
 																		</Draggable>

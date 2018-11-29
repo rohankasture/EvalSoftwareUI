@@ -5,6 +5,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Avatar from '@material-ui/core/Avatar';
 import deepPurple from '@material-ui/core/colors/deepPurple';
+import deepOrange from '@material-ui/core/colors/deepOrange';
 import { withStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
 
@@ -26,6 +27,19 @@ const styles = theme => ({
 		color: '#fff',
     	backgroundColor: "#00838f",
 	},
+
+	image_avatar:{
+		// margin:10,
+		width:20,
+		height:20,
+	},
+	greenAvatar: {
+		// margin: 10,
+		color: '#fff',
+		backgroundColor: '#006400',
+		width : 10,
+		height :10,
+	  },
   });
 
 class Tile extends Component {
@@ -53,6 +67,8 @@ class Tile extends Component {
 					<Avatar className={classes.avatar}>{this.props.rank}
 					</Avatar>
 					<ListItemText primary={this.props.name} />
+					<Avatar className={(this.props.doneflag)?classes.greenAvatar:""}/>
+					{/* <Avatar alt="Remy Sharp" src="/static/images/avatar/done.jpg" className={classes.image_avatar} /> */}
 				</ListItem>
 				<Divider className={classes.divider} backgroundColor="#00838f" />
 			</React.Fragment>
