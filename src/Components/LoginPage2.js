@@ -66,7 +66,6 @@ class Login extends Component {
         isValid : false,
         error : ""
       },
-      startflag : false,
     };
     this.handleSearch = this.handleSearch.bind(this);
     this.handleChangeUserName = this.handleChangeUserName.bind(this);
@@ -74,21 +73,29 @@ class Login extends Component {
   }
   handleChangeUserName(event) {
     let newState = Object.assign({}, this.state);
-    // if(this.state.username.value == ""){// && this.state.startflag){
-    //   newState.username.error = "Username is Required";
-    //   newState.username.isValid = false;
-    //   console.log("Reached here");
-    // }
-    // else{
+    if(event.target.value == ""){
+      newState.username.error = "Username is Required";
+      newState.username.isValid = false;
+    }
+    else{
       newState.username.value = event.target.value;
-      // newState.startflag = true;
-      //  }
-    console.log(this.state.username);
+      newState.username.error = "";
+      newState.username.isValid = true;
+       }
     this.setState(newState);
   }
   handleChangePassword(event) {
     let newState = Object.assign({}, this.state);
-    newState.password.value = event.target.value;
+    if(event.target.value == ""){
+      newState.password.error = "Password is Required";
+      newState.password.isValid = false;
+      
+    }
+    else{
+      newState.password.value = event.target.value;
+      newState.password.error = "";
+      newState.password.isValid = true;
+       }
     this.setState(newState);
   }
   handleSearch = (event) => {
@@ -145,12 +152,13 @@ class Login extends Component {
           <form className={classes.form}>
             <FormControl margin="normal" required fullWidth>
               <InputLabel htmlFor="email">IU Username</InputLabel>
-              <Input id="email" className = {this.state.username.isValid ? "pass":"fail"} value={this.state.username.value} name="email" autoComplete="email" autoFocus onChange={this.handleChangeUserName} />
-              {/* {!this.state.username.isValid && <span>{this.state.username.error}</span>} */}
+              <Input id="email" className = {this.state.username.isValid ? "pass":"fail"} name="email" autoComplete="email" autoFocus onChange={(event) => this.handleChangeUserName(event)} />
+              {!this.state.username.isValid && <span>{this.state.username.error}</span>}
             </FormControl>
             <FormControl margin="normal" required fullWidth>
               <InputLabel htmlFor="password">Password</InputLabel>
-              <Input name="password" className = {this.state.password.isValid? "pass":"fail"} value={this.state.password.value} type="password" id="password" autoComplete="current-password" onChange={this.handleChangePassword} />
+              <Input name="password" className = {this.state.password.isValid? "pass":"fail"} type="password" id="password" autoComplete="current-password" onChange={this.handleChangePassword} />
+              {!this.state.password.isValid && <span>{this.state.password.error}</span>}  
             </FormControl>
             {/* <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
