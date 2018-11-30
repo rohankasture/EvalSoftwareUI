@@ -8,7 +8,8 @@ import deepPurple from '@material-ui/core/colors/deepPurple';
 import deepOrange from '@material-ui/core/colors/deepOrange';
 import { withStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
-
+import iconImg from '../Images/icon.png'
+ 
 const styles = theme => ({
 	avatar: {
 		margin: 10,
@@ -28,8 +29,7 @@ const styles = theme => ({
     	backgroundColor: "#00838f",
 	},
 
-	image_avatar:{
-		// margin:10,
+	imageavatar:{
 		width:20,
 		height:20,
 	},
@@ -63,12 +63,13 @@ class Tile extends Component {
 		return (
 
 			<React.Fragment> 
+				
 				<ListItem className= {(this.props.id == this.props.selected_id)?classes.tilecolor2:classes.tilecolor} button onClick={this.props.onClick} >
 					<Avatar className={classes.avatar}>{this.props.rank}
 					</Avatar>
 					<ListItemText primary={this.props.name} />
-					<Avatar className={(this.props.doneflag)?classes.greenAvatar:""}/>
-					{/* <Avatar alt="Remy Sharp" src="/static/images/avatar/done.jpg" className={classes.image_avatar} /> */}
+					{/* <Avatar className={(this.props.doneflag)?classes.greenAvatar:""}/> */}
+					{this.props.doneflag && <Avatar alt="No" src={iconImg} className={classes.imageavatar}/>}
 				</ListItem>
 				<Divider className={classes.divider} backgroundColor="#00838f" />
 			</React.Fragment>
