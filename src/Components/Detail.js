@@ -97,9 +97,16 @@ class Detail extends Component {
 										required
 										name="Token"
 										value = {this.props.token}
+										onBlur= {(event) => {this.props.handleTokenSum(event.target.defaultValue)}} //event.persist();
 										onChange={(event) => this.props.handleTokenChange(event.target.value)}
 										margin="normal"
 									/>
+									
+									{/* {!this.props.sumTokenFlag && <span>{this.props.error}</span>}   */}
+								</div>
+								<div>
+								{this.props.sumTokenFlag && <span className = "tokenStyle">{this.props.error}</span>} 	
+								{/* <span className = "tokenStyle">Sum of Tokens is gt 100</span> */}
 								</div>
 						</Grid>
 						<Grid item>

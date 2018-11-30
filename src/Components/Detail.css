@@ -70,7 +70,10 @@
     height: 30px;
     font-weight: bold;
 }
-
+.tokenStyle{
+  float: left;
+  margin-left: 300px;
+}
 .Dropdown-root {
     position: relative;
     width: 40%;

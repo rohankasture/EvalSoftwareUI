@@ -20,13 +20,13 @@ const styles = theme => ({
 	tilecolor: {
 		margin: 10,
 		color: '#fff',
-    	backgroundColor: "#fff",
+		backgroundColor: "#fff",
 	},
 
 	tilecolor2: {
 		margin: 10,
 		color: '#fff',
-    	backgroundColor: "#00838f",
+		backgroundColor: "#00838f",
 	},
 
 	imageavatar:{
@@ -63,7 +63,6 @@ class Tile extends Component {
 		return (
 
 			<React.Fragment> 
-				
 				<ListItem className= {(this.props.id == this.props.selected_id)?classes.tilecolor2:classes.tilecolor} button onClick={this.props.onClick} >
 					<Avatar className={classes.avatar}>{this.props.rank}
 					</Avatar>

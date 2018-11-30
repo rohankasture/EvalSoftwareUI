@@ -62,16 +62,20 @@ class MainPage extends Component {
 					]
 				}
 			],
+			total : 0,
+			sumTokenFlag : false,
+			error : "",
 		};
 		this.handleDescriptionChange = this.handleDescriptionChange.bind(this);
 		this.handleTokenChange = this.handleTokenChange.bind(this);
+		this.handleTokenSum  = this.handleTokenSum.bind(this);
 		this.handleDone = this.handleDone.bind(this);
 	}
 
 	componentWillMount() {
 		this.setState({selected:this.state.data[0]});
 		axios
-			.get(`https://localhost:55555/team/rkasture`, {
+			.get(`https://localhost:55555/team`, {
 				headers: {
 					"Content-Type": "application/json",
 					"Access-Control-Allow-Origin": "*",
@@ -79,8 +83,8 @@ class MainPage extends Component {
 				}
 			})
 			//   .then(res => this.setState({ posts: res.data }))
-			.then(res => //console.log(res.data.BadAjectives)) 
-				this.setState({ options: res.data.BadAjectives }))
+			.then(res => console.log(res)) 
+				// this.setState({ options: res.data.BadAjectives }))
 			.catch(err => console.log(err))
 	}
 
@@ -89,6 +93,15 @@ class MainPage extends Component {
 		this.setState({ selected: this.state.data[id] });
 	}
 	handleTokenChange = (token) => {
+		var sum = parseInt(token);
+		sum = sum + this.state.total;
+		if(sum > 100){
+			this.state.error = "Sum of tokens should be 100";
+			this.state.sumTokenFlag = true;
+		}	
+		else{
+			this.state.sumTokenFlag = false;
+		}	
 		let selected = Object.assign({}, this.state.selected);
 		selected.token = token;
 		this.setState({selected});
@@ -102,10 +115,22 @@ class MainPage extends Component {
 	handleDone = () =>{
 		//For Done Avatar
 		this.state.selected.doneFlag = true;
-		
+		this.state.total = this.state.total + parseInt(this.state.selected.token);
 		let data = this.state.data;
 		data[this.state.selected.rank-1] = this.state.selected;
 		this.setState({data});
+	}
+	handleTokenSum = (token) => { 
+		console.log("Tp");
+		// var sum = parseInt(this.state.total);
+		// sum = sum + parseInt(token);
+		// if(sum > 100){
+		// 	this.state.error = "Sum of tokens should be 100";
+		// 	this.state.sumTokenFlag = true;
+		// }
+		// else{
+		// 	this.state.total = sum;
+		// }
 	}
 	
 	handleDescriptionChange = (description) => {
@@ -203,9 +228,12 @@ class MainPage extends Component {
 							</Grid>
 							<Grid item className={classes.cardGrid} direction="row" justify="center" alignItems="center">
 								<Detail  handleTokenChange = {this.handleTokenChange}
+										 handleTokenSum = {this.handleTokenSum}
 										 handleDescriptionChange = {this.handleDescriptionChange}						
 										 handleDone = {this.handleDone} 
 										 handleAdjectiveChange = {this.handleAdjectiveChange}
+										 sumTokenFlag = {this.state.sumTokenFlag}
+										 error = {this.state.error}
 								options={this.state.options} rank={this.state.selected.rank} name={this.state.selected.name} token={this.state.selected.token} adjective={this.state.selected.adjective} description={this.state.selected.description} 
 								/>
 							</Grid>
