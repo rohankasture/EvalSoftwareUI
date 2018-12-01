@@ -65,6 +65,7 @@ class MainPage extends Component {
 			sumTokenFlag : false,
 			error : "",
 			next : false,
+			back:false,
 			token:{
 				value : "",
 				isValid: true,
@@ -103,7 +104,13 @@ class MainPage extends Component {
 	}
 	handleNext = ()=>
 	{
+		this.setState({back:false})
 		this.setState({next:true})
+	}
+	handleBack = () =>{
+		this.setState({next:false})
+		this.setState({back:true})
+	
 	}
 	handleTokenChange = (token) => {
 		let newState = Object.assign({}, this.state);
@@ -226,7 +233,6 @@ class MainPage extends Component {
 						<Typography variant="h4" color="textPrimary">
 							Hello {name}
 						</Typography>
-
 					</Grid>
 
 					<Grid item className={classes.gridRoot} direction="row" justify="center" alignItems="" alignContent="center">
@@ -273,6 +279,8 @@ class MainPage extends Component {
 										 selectedUser = {this.state.selected}
 										 options={this.state.options}   
 										 handleNext ={this.handleNext}
+										 handleBack = {this.handleBack}
+										 back = {this.state.back}
 										 next ={this.state.next}
 										 token = {this.state.token}
 										 description ={this.state.description}

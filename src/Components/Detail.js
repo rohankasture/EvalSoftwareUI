@@ -49,31 +49,30 @@ const styles = theme => ({
 class Detail extends Component {
 	constructor(props) {
 		super(props);
-		this.handleClick = this.handleClick.bind(this);
-		this.handleChangeDropDown = this.handleChangeDropDown.bind(this);
 		this.state = {
-			id: this.props.id,
-			next: false
+			id: this.props.id
 		};
 
 	}
-	handleClick = event => {
-		
-	}
-
-	handleChangeDropDown = event => {
-		
-	}
-	handleNext = event => {
-		this.setState({ next: true })
-	}
+	
 
 	render() {
 		const { classes } = this.props;
 		var {is_manager} = this.props.selectedUser;
 		if(this.props.next){
 			return(
-				<Manager handleDone={this.props.handleDone} handleChange={this.props.handleChange} selectedUser ={this.props.selectedUser}/>
+				<Manager back = {this.props.back} handleDone={this.props.handleDone} handleChange={this.props.handleChange} selectedUser ={this.props.selectedUser} handleBack = {this.props.handleBack}
+										handleTokenChange = {this.props.handleTokenChange}
+										 handleAdjectiveChange ={this.props.handleAdjectiveChange}
+										 sumTokenFlag = {this.props.sumTokenFlag}
+										 error = {this.props.error}
+										 options={this.props.options}   
+										 handleNext ={this.props.handleNext}
+										 next ={this.props.next}
+										 token = {this.props.token}
+										 description ={this.props.description}
+				
+				/>
 			);
 		}
 		const button = is_manager === "1" ? (

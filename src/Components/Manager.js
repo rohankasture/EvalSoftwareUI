@@ -10,6 +10,7 @@ import { Grid, Typography, Table, TableBody,TableCell,TableRow,TableHead } from 
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Detail from './Detail';
 
 const styles = theme => ({
     card: {
@@ -59,7 +60,7 @@ const rows = [
 ];
 
 
-class Detail extends Component {
+class Manager extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -70,6 +71,26 @@ class Detail extends Component {
 
     render() {
         const { classes } = this.props;
+        if(this.props.back)
+        {
+            console.log("change ui")
+            return(
+                <Detail  handleTokenChange = {this.props.handleTokenChange}
+										 handleAdjectiveChange ={this.props.handleAdjectiveChange}
+										 handleDone = {this.props.handleDone} 
+										 handleChange = {this.props.handleChange}
+										 sumTokenFlag = {this.props.sumTokenFlag}
+										 error = {this.props.error}
+										 selectedUser = {this.props.selectedUser}
+										 options={this.props.options}   
+										 handleNext ={this.props.handleNext}
+										 next ={this.props.next}
+										 token = {this.props.token}
+										 description ={this.props.description}
+								/>
+            );
+
+        }
         return (
             <Card className={classes.card}>
                 <CardContent className={classes.content}>
@@ -150,14 +171,15 @@ class Detail extends Component {
                     </Grid>
                 </CardContent>
                 <CardActions className={classes.actions}>
+                    <Button color="secondary" variant='contained' className="buttonStyle" onClick={this.props.handleBack}> Back</Button>
                     <Button color="secondary" variant='contained' className="buttonStyle" onClick={this.props.handleDone}> Done</Button>
                 </CardActions>
             </Card>
         );
     }
 }
-Detail.propTypes = {
+Manager.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(Detail);
+export default withStyles(styles)(Manager);
