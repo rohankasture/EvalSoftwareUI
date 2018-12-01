@@ -105,6 +105,12 @@ class MainPage extends Component {
 
 	// handleOnClick(id) - > will set the selected property in state to the selected id from data. eg selected = data[id]
 	handleOnClick = (id) => {
+		let newState = Object.assign({}, this.state);
+		newState.token.isValid = true;
+		newState.adjective.isValid = true;
+		newState.description.isValid = true;
+		this.setState(newState);
+		
 		this.setState({next:false})
 		this.setState({ selected: this.state.data[id] });
 	}
@@ -116,7 +122,6 @@ class MainPage extends Component {
 	handleBack = () =>{
 		this.setState({next:false})
 		this.setState({back:true})
-	
 	}
 	handleTokenChange = (token) => {
 		let newState = Object.assign({}, this.state);
@@ -180,8 +185,12 @@ class MainPage extends Component {
 		
 		if(!flag){
 		//For Done Avatar
-		this.state.selected.doneFlag = true;
-		this.state.total = this.state.total + parseInt(this.state.selected.token);
+		let selected = this.state.selected;
+		selected.doneFlag = true;
+		this.setState({selected})
+		let total = this.state.total
+		total = total + parseInt(this.state.selected.token)
+		this.setState({total}) 
 		let data = this.state.data;
 		data[this.state.selected.rank-1] = this.state.selected;
 		this.setState({data});
@@ -243,6 +252,7 @@ class MainPage extends Component {
 	render() {
 		const { classes } = this.props;
 		var name = localStorage.getItem('name');
+		var remaining = 100 - this.state.total;
 		return (
 			<MuiThemeProvider theme={muiTheme}>
 				<ButtonAppBar />
@@ -252,6 +262,9 @@ class MainPage extends Component {
 
 						<Typography variant="h4" color="textPrimary">
 							Hello {name}
+						</Typography>
+						<Typography className = "tokenDisplay" variant="h6" color="textPrimary">
+						 Tokens Left: {remaining} 
 						</Typography>
 					</Grid>
 

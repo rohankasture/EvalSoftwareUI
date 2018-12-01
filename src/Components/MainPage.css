@@ -36,3 +36,6 @@
 .tile{
     background-color: blueviolet;
 }
+.tokenDisplay{
+    float: right;
+}
