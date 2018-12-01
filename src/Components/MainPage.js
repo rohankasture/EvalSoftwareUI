@@ -65,9 +65,18 @@ class MainPage extends Component {
 			sumTokenFlag : false,
 			error : "",
 			next : false,
+			token:{
+				value : "",
+				isValid: true,
+				error : ""
+			  }, 
+			description:{
+				value : "",
+				isValid: true,
+				error : ""
+			  },   
 		};
 		this.handleTokenChange = this.handleTokenChange.bind(this);
-		this.handleTokenSum  = this.handleTokenSum.bind(this);
 		this.handleDone = this.handleDone.bind(this);
 	}
 
@@ -97,14 +106,24 @@ class MainPage extends Component {
 		this.setState({next:true})
 	}
 	handleTokenChange = (token) => {
+		let newState = Object.assign({}, this.state);
+		if(token == ""){
+		newState.token.error = "Token is Required";
+		newState.token.isValid = false;
+		}
+		else{
+		newState.token.value = token;
+		newState.token.error = "";
+		newState.token.isValid = true;
+		}
+		this.setState(newState);
 		var sum = parseInt(token);
 		sum = sum + this.state.total;
 		if(sum > 100){
-			this.state.error = "Sum of tokens should be 100";
-			this.state.sumTokenFlag = true;
+			this.setState ({error:"Sum of tokens should be 100",sumTokenFlag:true});
 		}	
 		else{
-			this.state.sumTokenFlag = false;
+			this.setState ({sumTokenFlag:false});
 		}	
 		let selected = Object.assign({}, this.state.selected);
 		selected.token = token;
@@ -117,29 +136,43 @@ class MainPage extends Component {
 	}
 
 	handleDone = () =>{
+		let selected = Object.assign({}, this.state.selected);
+		let newState = Object.assign({}, this.state);
+		let flag = false;
+		if(selected.token == ""){
+			newState.token.error = "Token is Required";
+			newState.token.isValid = false;
+			flag = true;
+		}
+		if(selected.description == ""){
+			newState.description.error = "Description is Required";
+			newState.description.isValid = false;			
+			flag = true	;
+		}
+		this.setState(newState);
+		
+		if(!flag){
 		//For Done Avatar
 		this.state.selected.doneFlag = true;
 		this.state.total = this.state.total + parseInt(this.state.selected.token);
 		let data = this.state.data;
 		data[this.state.selected.rank-1] = this.state.selected;
 		this.setState({data});
+		}
 	}
-	handleTokenSum = (token) => { 
-		console.log("Tp");
-		// var sum = parseInt(this.state.total);
-		// sum = sum + parseInt(token);
-		// if(sum > 100){
-		// 	this.state.error = "Sum of tokens should be 100";
-		// 	this.state.sumTokenFlag = true;
-		// }
-		// else{
-		// 	this.state.total = sum;
-		// }
-	}
-	
-	
-	
 	handleChange = (event) =>{
+		let newState = Object.assign({}, this.state);
+		if(event.target.value == ""){
+		newState.description.error = "Description is Required";
+		newState.description.isValid = false;
+		}
+		else{
+		newState.description.value = event.target.value;
+		newState.description.error = "";
+		newState.description.isValid = true;
+		}
+		this.setState(newState);
+
 		console.log(event.target)
 		let selected = Object.assign({}, this.state.selected);
 		selected[event.target.name] = event.target.value
@@ -232,16 +265,17 @@ class MainPage extends Component {
 							</Grid>
 							<Grid item className={classes.cardGrid} direction="row" justify="center" alignItems="center">
 								<Detail  handleTokenChange = {this.handleTokenChange}
-										 handleTokenSum = {this.handleTokenSum}
 										 handleAdjectiveChange ={this.handleAdjectiveChange}
 										 handleDone = {this.handleDone} 
+										 handleChange = {this.handleChange}
 										 sumTokenFlag = {this.state.sumTokenFlag}
 										 error = {this.state.error}
-										 handleChange = {this.handleChange}
 										 selectedUser = {this.state.selected}
 										 options={this.state.options}   
 										 handleNext ={this.handleNext}
 										 next ={this.state.next}
+										 token = {this.state.token}
+										 description ={this.state.description}
 								/>
 							</Grid>
 						</Grid>

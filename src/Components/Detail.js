@@ -114,12 +114,13 @@ class Detail extends Component {
 									required
 									name="Token"
 									value={this.props.selectedUser.token}
-									onBlur={(event) => { this.props.handleTokenSum(event.target.defaultValue) }} //event.persist();
+									onBlur={(event) => { this.props.handleTokenChange(event.target.defaultValue) }} //event.persist();
 									onChange={(event) => this.props.handleTokenChange(event.target.value)}
 									margin="normal"
 								/>
 							</div>
 							<div>
+								{!this.props.token.isValid && <span className="tokenStyle">{this.props.token.error}</span>}	
 								{this.props.sumTokenFlag && <span className="tokenStyle">{this.props.error}</span>}
 							</div>
 						</Grid>
@@ -147,6 +148,7 @@ class Detail extends Component {
 									variant="outlined"
 									name="description"
 									value={this.props.selectedUser.description}
+									onBlur = {this.props.handleChange}
 									onChange={this.props.handleChange}
 									margin="normal"
 									multiline={true}
@@ -155,6 +157,7 @@ class Detail extends Component {
 									className={classes.textField}
 								/>
 							</div>
+							<div>{!this.props.description.isValid && <span className="tokenStyle">{this.props.description.error}</span>}	</div>
 						</Grid>
 					</Grid>
 				</CardContent>

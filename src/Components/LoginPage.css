@@ -4,14 +4,12 @@
   background-color: rgba(110, 29, 29, 0.11);
 }
 .fContainer{
-  /*background: red;*/
   display: flex;
   flex-direction: row;
   padding-top: 10px 0;
   justify-content: center;
 }
 .flexItem{
-/* background: yellow;	*/
  padding:20px;
  padding-left: 10px;
  flex-basis:80px;
@@ -20,12 +18,7 @@
 .divStyle{
 	padding-top: 5px;
 }
-.pass{
-  /* background-color: rgb(0, 247, 255); */
-  /* color: 'orangered'; */
-}
-.fail
-{
-  /* background-color: red; */
-  /* color : 'red'; */
+
+.errorStyle{
+  color:red;
 }
