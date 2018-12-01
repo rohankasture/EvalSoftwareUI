@@ -11,12 +11,14 @@ import CardContent from '@material-ui/core/CardContent';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import { Grid, Input, Typography, TextField, FormControl } from "@material-ui/core";
+import Manager from "./Manager";
 
 const styles = theme => ({
 	card: {
 		height: '90%',
+		maxHeight:'600px',
 		width: '100%',
-		minWidth: '600px',
+		minWidth: '750px',
 		overflowY: 'auto',
 	},
 	content: {
@@ -30,14 +32,16 @@ const styles = theme => ({
 		marginTop: theme.spacing.unit * 3,
 		marginLeft: theme.spacing.unit,
 	},
-	
+
 	text: {
 		verticalAlign: "top",
 		textAlign: "left"
 	},
-	description: {
-		width: '100%',
-		minWidth: '300px'
+
+	textField: {
+		marginLeft: theme.spacing.unit,
+		marginRight: theme.spacing.unit,
+		width: "100%",
 	}
 
 });
@@ -49,6 +53,7 @@ class Detail extends Component {
 		this.handleChangeDropDown = this.handleChangeDropDown.bind(this);
 		this.state = {
 			id: this.props.id,
+			next: false
 		};
 
 	}
@@ -59,92 +64,103 @@ class Detail extends Component {
 	handleChangeDropDown = event => {
 		console.log('Changed');
 	}
+	handleNext = event => {
+		this.setState({ next: true })
+	}
 
 	render() {
-		const { classes } = this.props;
-
+		const { classes, is_manager } = this.props;
+		if(this.state.next){
+			console.log("next")
+			return(
+				<Manager handleDone={this.props.handleDone} handleChange={this.props.handleChange} selectedUser ={this.props.selectedUser}/>
+			);
+		}
+		const button = is_manager === "1" ? (
+			<Button color="secondary" variant='contained' className="buttonStyle" onClick={this.handleNext}> Next</Button>
+		) : (
+			<Button color="secondary" variant='contained' className="buttonStyle" onClick={this.props.handleDone}> Done</Button>
+			)
 		return (
 			<Card className={classes.card}>
 				<CardContent className={classes.content}>
-				<Grid container direction="column" spacing={24}>
+					<Grid container direction="column" spacing={24}>
 						<Grid item>
-								<div className="labelStyle">
-									<Typography variant="h6" color="textPrimary" className={classes.text} >
-											Rank
+							<div className="labelStyle">
+								<Typography variant="h6" color="textPrimary" className={classes.text} >
+									Rank
 									</Typography>
-								</div>
-								<div className="inputStyle">
-									<Input
-										required
-										name="Rank"
-										value={this.props.rank}
-										onChange={this.handleChange}
-										margin="normal"
-										InputProps={{
-											readOnly: true,
-										  }}
-									/>
-								</div>
+							</div>
+							<div className="inputStyle">
+								<Input
+									required
+									name="Rank"
+									value={this.props.rank}
+									onChange={this.handleChange}
+									margin="normal"
+									InputProps={{
+										readOnly: true,
+									}}
+								/>
+							</div>
 						</Grid>
 						<Grid item>
-								<div className="labelStyle">
-									<Typography variant="h6" color="textPrimary" className={classes.text} >
-										Token
+							<div className="labelStyle">
+								<Typography variant="h6" color="textPrimary" className={classes.text} >
+									Token
 									</Typography>
-								</div>
-								<div className="inputStyle">
-									<Input
-										required
-										name="Token"
-										value = {this.props.token}
-										onBlur= {(event) => {this.props.handleTokenSum(event.target.defaultValue)}} //event.persist();
-										onChange={(event) => this.props.handleTokenChange(event.target.value)}
-										margin="normal"
-									/>
-									
-									{/* {!this.props.sumTokenFlag && <span>{this.props.error}</span>}   */}
-								</div>
-								<div>
-								{this.props.sumTokenFlag && <span className = "tokenStyle">{this.props.error}</span>} 	
-								{/* <span className = "tokenStyle">Sum of Tokens is gt 100</span> */}
-								</div>
+							</div>
+							<div className="inputStyle">
+								<Input
+									required
+									name="Token"
+									value={this.props.token}
+									onBlur={(event) => { this.props.handleTokenSum(event.target.defaultValue) }} //event.persist();
+									onChange={(event) => this.props.handleTokenChange(event.target.value)}
+									margin="normal"
+								/>
+							</div>
+							<div>
+								{this.props.sumTokenFlag && <span className="tokenStyle">{this.props.error}</span>}
+							</div>
 						</Grid>
 						<Grid item>
-								<div className="labelStyle">
-									<Typography variant="h6" color="textPrimary" className={classes.text} >
-										Adjective
+							<div className="labelStyle">
+								<Typography variant="h6" color="textPrimary" className={classes.text} >
+									Adjective
 									</Typography>
-								</div>
-								<div className="inputStyle">
-									<Dropdown  options={this.props.options} onChange={this.props.handleAdjectiveChange} value={this.props.adjective} placeholder="Select an adjective" ></Dropdown>
-								</div>
+							</div>
+							<div className="inputStyle">
+								<Dropdown options={this.props.options} onChange={this.props.handleAdjectiveChange} value={this.props.adjective} placeholder="Select an adjective" ></Dropdown>
+							</div>
 						</Grid>
 						<Grid item>
-								<div className="labelStyle">
-									<Typography variant="h6" color="textPrimary" className={classes.text} >
-										Description
+							<div className="labelStyle">
+								<Typography variant="h6" color="textPrimary" className={classes.text} >
+									Description
 									</Typography>
-								</div>
-								<div className="desInputStyle">
-									<TextField
-										required
-										id="outlined-textarea"
-										multiline
-										variant="outlined"
-										name="Description"
-										value ={this.props.description}
-										onChange={(event) => this.props.handleDescriptionChange(event.target.value)}
-										margin ="normal"
-										multiline={true}
-										rows={4}
-										rowsMax={5}
-									/>
-								</div>
+							</div>
+							<div className="desInputStyle">
+								<TextField
+									required
+									id="outlined-textarea"
+									multiline
+									variant="outlined"
+									name="Description"
+									value={this.props.description}
+									onChange={(event) => this.props.handleDescriptionChange(event.target.value)}
+									margin="normal"
+									multiline={true}
+									rows={7}
+									rowsMax={7}
+									className={classes.textField}
+								/>
+							</div>
 						</Grid>
 					</Grid>
 				</CardContent>
 				<CardActions className={classes.actions}>
-					<Button color="secondary" variant='contained' className="buttonStyle" onClick={this.props.handleDone}> Done</Button>
+					{button}
 				</CardActions>
 			</Card>
 		);

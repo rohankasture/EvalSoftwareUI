@@ -26,7 +26,7 @@ const styles = theme => ({
 	tilecolor2: {
 		margin: 10,
 		color: '#fff',
-		backgroundColor: "#00838f",
+		backgroundColor: "#4fb3bf",
 	},
 
 	imageavatar:{
@@ -64,10 +64,9 @@ class Tile extends Component {
 
 			<React.Fragment> 
 				<ListItem className= {(this.props.id == this.props.selected_id)?classes.tilecolor2:classes.tilecolor} button onClick={this.props.onClick} >
-					<Avatar className={classes.avatar}>{this.props.rank}
+					<Avatar className={classes.avatar}>{this.props.initials}
 					</Avatar>
 					<ListItemText primary={this.props.name} />
-					{/* <Avatar className={(this.props.doneflag)?classes.greenAvatar:""}/> */}
 					{this.props.doneflag && <Avatar alt="No" src={iconImg} className={classes.imageavatar}/>}
 				</ListItem>
 				<Divider className={classes.divider} backgroundColor="#00838f" />

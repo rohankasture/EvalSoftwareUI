@@ -29,23 +29,22 @@ const styles = theme => ({
 	},
 	card: {
 		height: '90%',
+		maxHeight: '600px',
 		overflowY: 'auto',
-	}
+	},
 
 });
-
 class MainPage extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
 			data: [
-				{ rank: 1, initials: 'RK', name: 'Rohan Kasture', token: '', adjective: '', description: '', userId: 'rkasture',doneFlag : false},
-				{ rank: 2, initials: 'AA', name: 'Ankita Alshi', token: '', adjective: '', description: '', userId: 'aralshi' ,doneFlag : false},
-				{ rank: 3, initials: 'RM', name: 'Rocco Manzo', token: '', adjective: '', description: '', userId: 'rmanzo',doneFlag : false },
-				{ rank: 4, initials: 'SB', name: 'Shradha Baranwal', token: '', adjective: '', description: '', userId: 'sbaranwa',doneFlag : false },
-				{ rank: 5, initials: 'RD', name: 'Ramya DG', token: '', adjective: '', description: '', userId: 'ramyaDG',doneFlag : false},
-				{ rank: 6, initials: 'SK', name: 'Shweta Kulkarni', token: '', adjective: '', description: '', userId: 'svkul' ,doneFlag : false},
-				
+				{ rank: 1, initials: 'RK', name: 'Rohan Kasture', token: '', adjective: '', description: '', userId: 'rkasture',doneFlag : false,is_manager: "0"},
+				{ rank: 2, initials: 'AA', name: 'Ankita Alshi', token: '', adjective: '', description: '', userId: 'aralshi' ,doneFlag : false, is_manager: "0"},
+				{ rank: 3, initials: 'RM', name: 'Rocco Manzo', token: '', adjective: '', description: '', userId: 'rmanzo',doneFlag : false , is_manager : "1"},
+				{ rank: 4, initials: 'SB', name: 'Shradha Baranwal', token: '', adjective: '', description: '', userId: 'sbaranwa',doneFlag : false, is_manager: "0" },
+				{ rank: 5, initials: 'RD', name: 'Ramya DG', token: '', adjective: '', description: '', userId: 'ramyaDG',doneFlag : false, is_manager : "0"},
+				{ rank: 6, initials: 'SK', name: 'Shweta Kulkarni', token: '', adjective: '', description: '', userId: 'svkul' ,doneFlag : false ,is_manager : "0"},
 			],
 			selected: "",
 			options: [
@@ -118,6 +117,7 @@ class MainPage extends Component {
 		this.state.total = this.state.total + parseInt(this.state.selected.token);
 		let data = this.state.data;
 		data[this.state.selected.rank-1] = this.state.selected;
+		console.log(this.state.selected)
 		this.setState({data});
 	}
 	handleTokenSum = (token) => { 
@@ -134,13 +134,16 @@ class MainPage extends Component {
 	}
 	
 	handleDescriptionChange = (description) => {
-		// const { target: { name, value } } = event;
-		//this.setState(() => ({ description: event.target.value }))
 		let selected = Object.assign({}, this.state.selected);
 		selected.description = description;
 		this.setState({selected});
 	}
 	
+	handleChange = (event) =>{
+		let selected = Object.assign({}, this.state.selected);
+		selected[event.target.name] = event.target.value
+        this.setState({selected})
+	}
 	
 	reorder = (list, startIndex, endIndex) => {
 		const result = Array.from(list);
@@ -234,6 +237,9 @@ class MainPage extends Component {
 										 handleAdjectiveChange = {this.handleAdjectiveChange}
 										 sumTokenFlag = {this.state.sumTokenFlag}
 										 error = {this.state.error}
+										 is_manager ={this.state.selected.is_manager}
+										 handleChange = {this.handleChange}
+										 selectedUser = {this.state.selected}
 								options={this.state.options} rank={this.state.selected.rank} name={this.state.selected.name} token={this.state.selected.token} adjective={this.state.selected.adjective} description={this.state.selected.description} 
 								/>
 							</Grid>
