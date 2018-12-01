@@ -8,8 +8,6 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import { Grid, Typography, Table, TableBody,TableCell,TableRow,TableHead } from "@material-ui/core";
 import Radio from '@material-ui/core/Radio';
-import RadioGroup from '@material-ui/core/RadioGroup';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Detail from './Detail';
 
 const styles = theme => ({

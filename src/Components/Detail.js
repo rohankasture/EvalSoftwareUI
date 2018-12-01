@@ -2,15 +2,12 @@ import React, { Component } from "react";
 import "./Detail.css";
 import Dropdown from 'react-dropdown';
 import Button from '@material-ui/core/Button';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import muiTheme from './Theme.js';
-import { MuiThemeProvider } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions'
 import CardContent from '@material-ui/core/CardContent';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import { Grid, Input, Typography, TextField, FormControl } from "@material-ui/core";
+import { Grid, Input, Typography, TextField} from "@material-ui/core";
 import Manager from "./Manager";
 
 const styles = theme => ({
@@ -118,9 +115,11 @@ class Detail extends Component {
 									margin="normal"
 								/>
 							</div>
-							<div>
-								{!this.props.token.isValid && <span className="tokenStyle">{this.props.token.error}</span>}	
-								{this.props.sumTokenFlag && <span className="tokenStyle">{this.props.error}</span>}
+							<div className = "tokenStyle">
+							{!this.props.token.isValid && <Typography variant ="body2" color = "error">{this.props.token.error}</Typography>}
+							{this.props.sumTokenFlag && <Typography   variant ="body2" color = "error">{this.props.error}</Typography>}
+								{/* {!this.props.token.isValid && <span className="tokenStyle">{this.props.token.error}</span>}	 */}
+								{/* {this.props.sumTokenFlag && <span className="tokenStyle">{this.props.error}</span>} */}
 							</div>
 						</Grid>
 						<Grid item>
@@ -131,7 +130,8 @@ class Detail extends Component {
 							</div>
 							<div className="inputStyle">
 								<Dropdown options={this.props.options} onChange={this.props.handleAdjectiveChange} value={this.props.selectedUser.adjective} placeholder="Select an adjective" ></Dropdown>
-								{!(this.props.adjective.isValid) && <span className="adjectiveStyle">{this.props.adjective.error}</span>}	
+								{!this.props.adjective.isValid && <Typography className="adjectiveStyle" variant ="body2" color = "error">{this.props.adjective.error}</Typography>}
+								{/* {!(this.props.adjective.isValid) && <span className="adjectiveStyle">{this.props.adjective.error}</span>}	 */}
 							</div>
 						</Grid>
 						<Grid item>
@@ -157,7 +157,8 @@ class Detail extends Component {
 									className={classes.textField}
 								/>
 							</div>
-							<div>{!this.props.description.isValid && <span className="tokenStyle">{this.props.description.error}</span>}	</div>
+							<div className="descriptionStyle">{!this.props.description.isValid && <Typography variant ="body2" color = "error">{this.props.description.error}</Typography>}</div>
+							{/* <div>{!this.props.description.isValid && <span className="tokenStyle">{this.props.description.error}</span>}	</div> */}
 						</Grid>
 					</Grid>
 				</CardContent>

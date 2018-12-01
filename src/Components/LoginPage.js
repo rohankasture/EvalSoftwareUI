@@ -4,8 +4,6 @@ import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import FormControl from '@material-ui/core/FormControl';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
 import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
 import LockIcon from '@material-ui/icons/LockOutlined';
@@ -13,11 +11,6 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
 import axios from 'axios';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
 import "./LoginPage.css";
 
 const styles = theme => ({
@@ -159,18 +152,15 @@ class Login extends Component {
             <FormControl margin="normal" required fullWidth>
               <InputLabel htmlFor="email">IU Username</InputLabel>
               <Input id="email" className = {this.state.username.isValid ? "pass":"fail"} name="email" autoComplete="email" autoFocus onChange={(event) => this.handleChangeUserName(event)} />
-              {!this.state.username.isValid && <span>{this.state.username.error}</span>}
+              {!this.state.username.isValid && <Typography variant ="body2" color = "error">{this.state.username.error}</Typography>}
+              
             </FormControl>
             <FormControl margin="normal" required fullWidth>
               <InputLabel htmlFor="password">Password</InputLabel>
               <Input name="password" className = {this.state.password.isValid? "pass":"fail"} type="password" id="password" autoComplete="current-password" onChange={this.handleChangePassword} />
-              {!this.state.password.isValid && <span>{this.state.password.error}</span>}  
-              {this.state.loginFlag && <span className = "errorStyle">{this.state.error_message}</span>}
+              {!this.state.password.isValid && <Typography variant ="body2" color = "error">{this.state.password.error}</Typography>}
+              {this.state.loginFlag && <Typography variant ="body2" color = "error">{this.state.error_message}</Typography>}
             </FormControl>
-            {/* <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
-            /> */}
             <Button
               type="submit"
               fullWidth
