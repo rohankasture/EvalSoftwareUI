@@ -58,26 +58,26 @@ class Detail extends Component {
 
 	}
 	handleClick = event => {
-		console.log('Clicked1');
+		
 	}
 
 	handleChangeDropDown = event => {
-		console.log('Changed');
+		
 	}
 	handleNext = event => {
 		this.setState({ next: true })
 	}
 
 	render() {
-		const { classes, is_manager } = this.props;
-		if(this.state.next){
-			console.log("next")
+		const { classes } = this.props;
+		var {is_manager} = this.props.selectedUser;
+		if(this.props.next){
 			return(
 				<Manager handleDone={this.props.handleDone} handleChange={this.props.handleChange} selectedUser ={this.props.selectedUser}/>
 			);
 		}
 		const button = is_manager === "1" ? (
-			<Button color="secondary" variant='contained' className="buttonStyle" onClick={this.handleNext}> Next</Button>
+			<Button color="secondary" variant='contained' className="buttonStyle" onClick={this.props.handleNext}> Next</Button>
 		) : (
 			<Button color="secondary" variant='contained' className="buttonStyle" onClick={this.props.handleDone}> Done</Button>
 			)
@@ -95,8 +95,7 @@ class Detail extends Component {
 								<Input
 									required
 									name="Rank"
-									value={this.props.rank}
-									onChange={this.handleChange}
+									value={this.props.selectedUser.rank}
 									margin="normal"
 									InputProps={{
 										readOnly: true,
@@ -114,7 +113,7 @@ class Detail extends Component {
 								<Input
 									required
 									name="Token"
-									value={this.props.token}
+									value={this.props.selectedUser.token}
 									onBlur={(event) => { this.props.handleTokenSum(event.target.defaultValue) }} //event.persist();
 									onChange={(event) => this.props.handleTokenChange(event.target.value)}
 									margin="normal"
@@ -131,7 +130,7 @@ class Detail extends Component {
 									</Typography>
 							</div>
 							<div className="inputStyle">
-								<Dropdown options={this.props.options} onChange={this.props.handleAdjectiveChange} value={this.props.adjective} placeholder="Select an adjective" ></Dropdown>
+								<Dropdown options={this.props.options}  onChange={this.props.handleAdjectiveChange} value={this.props.selectedUser.adjective} placeholder="Select an adjective" ></Dropdown>
 							</div>
 						</Grid>
 						<Grid item>
@@ -146,9 +145,9 @@ class Detail extends Component {
 									id="outlined-textarea"
 									multiline
 									variant="outlined"
-									name="Description"
-									value={this.props.description}
-									onChange={(event) => this.props.handleDescriptionChange(event.target.value)}
+									name="description"
+									value={this.props.selectedUser.description}
+									onChange={this.props.handleChange}
 									margin="normal"
 									multiline={true}
 									rows={7}

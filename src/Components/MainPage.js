@@ -64,8 +64,8 @@ class MainPage extends Component {
 			total : 0,
 			sumTokenFlag : false,
 			error : "",
+			next : false,
 		};
-		this.handleDescriptionChange = this.handleDescriptionChange.bind(this);
 		this.handleTokenChange = this.handleTokenChange.bind(this);
 		this.handleTokenSum  = this.handleTokenSum.bind(this);
 		this.handleDone = this.handleDone.bind(this);
@@ -89,7 +89,12 @@ class MainPage extends Component {
 
 	// handleOnClick(id) - > will set the selected property in state to the selected id from data. eg selected = data[id]
 	handleOnClick = (id) => {
+		this.setState({next:false})
 		this.setState({ selected: this.state.data[id] });
+	}
+	handleNext = ()=>
+	{
+		this.setState({next:true})
 	}
 	handleTokenChange = (token) => {
 		var sum = parseInt(token);
@@ -117,7 +122,6 @@ class MainPage extends Component {
 		this.state.total = this.state.total + parseInt(this.state.selected.token);
 		let data = this.state.data;
 		data[this.state.selected.rank-1] = this.state.selected;
-		console.log(this.state.selected)
 		this.setState({data});
 	}
 	handleTokenSum = (token) => { 
@@ -133,13 +137,10 @@ class MainPage extends Component {
 		// }
 	}
 	
-	handleDescriptionChange = (description) => {
-		let selected = Object.assign({}, this.state.selected);
-		selected.description = description;
-		this.setState({selected});
-	}
+	
 	
 	handleChange = (event) =>{
+		console.log(event.target)
 		let selected = Object.assign({}, this.state.selected);
 		selected[event.target.name] = event.target.value
         this.setState({selected})
@@ -232,15 +233,15 @@ class MainPage extends Component {
 							<Grid item className={classes.cardGrid} direction="row" justify="center" alignItems="center">
 								<Detail  handleTokenChange = {this.handleTokenChange}
 										 handleTokenSum = {this.handleTokenSum}
-										 handleDescriptionChange = {this.handleDescriptionChange}						
+										 handleAdjectiveChange ={this.handleAdjectiveChange}
 										 handleDone = {this.handleDone} 
-										 handleAdjectiveChange = {this.handleAdjectiveChange}
 										 sumTokenFlag = {this.state.sumTokenFlag}
 										 error = {this.state.error}
-										 is_manager ={this.state.selected.is_manager}
 										 handleChange = {this.handleChange}
 										 selectedUser = {this.state.selected}
-								options={this.state.options} rank={this.state.selected.rank} name={this.state.selected.name} token={this.state.selected.token} adjective={this.state.selected.adjective} description={this.state.selected.description} 
+										 options={this.state.options}   
+										 handleNext ={this.handleNext}
+										 next ={this.state.next}
 								/>
 							</Grid>
 						</Grid>
