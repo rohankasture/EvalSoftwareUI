@@ -74,6 +74,10 @@
   float: left;
   margin-left: 400px;
 }
+.adjectiveStyle{
+  float: left;
+  margin-left: 100px;
+}
 .Dropdown-root {
     position: relative;
     width: 40%;
