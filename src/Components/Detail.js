@@ -131,7 +131,8 @@ class Detail extends Component {
 									</Typography>
 							</div>
 							<div className="inputStyle">
-								<Dropdown options={this.props.options}  onChange={this.props.handleAdjectiveChange} value={this.props.selectedUser.adjective} placeholder="Select an adjective" ></Dropdown>
+								<Dropdown options={this.props.options} onChange={this.props.handleAdjectiveChange} value={this.props.selectedUser.adjective} placeholder="Select an adjective" ></Dropdown>
+								{!(this.props.adjective.isValid) && <span className="adjectiveStyle">{this.props.adjective.error}</span>}	
 							</div>
 						</Grid>
 						<Grid item>

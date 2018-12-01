@@ -74,10 +74,16 @@ class MainPage extends Component {
 				value : "",
 				isValid: true,
 				error : ""
-			  },   
+			  }, 
+			adjective:{
+				value : "",
+				isValid: true,
+				error : ""
+			}, 
 		};
 		this.handleTokenChange = this.handleTokenChange.bind(this);
 		this.handleDone = this.handleDone.bind(this);
+		this.handleAdjectiveChange = this.handleAdjectiveChange.bind(this);
 	}
 
 	componentWillMount() {
@@ -129,9 +135,17 @@ class MainPage extends Component {
 		selected.token = token;
 		this.setState({selected});
 	}
-	handleAdjectiveChange = (adjective) => {
+	handleAdjectiveChange = (event) => {
+		let newState = Object.assign({}, this.state);
+		if(event.label != ""){
+		newState.adjective.value = event.label;
+		newState.adjective.error = "";
+		newState.adjective.isValid = true;
+		}
+		this.setState(newState);
+
 		let selected = Object.assign({}, this.state.selected);
-		selected.adjective = adjective;
+		selected.adjective = event.label;
 		this.setState({selected});
 	}
 
@@ -149,6 +163,12 @@ class MainPage extends Component {
 			newState.description.isValid = false;			
 			flag = true	;
 		}
+		if(selected.adjective == ""){
+			newState.adjective.error = "Adjective is Required";
+			newState.adjective.isValid = false;			
+			flag = true	;
+		}
+
 		this.setState(newState);
 		
 		if(!flag){
@@ -276,6 +296,7 @@ class MainPage extends Component {
 										 next ={this.state.next}
 										 token = {this.state.token}
 										 description ={this.state.description}
+										 adjective = {this.state.adjective}
 								/>
 							</Grid>
 						</Grid>
