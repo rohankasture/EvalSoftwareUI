@@ -2,7 +2,7 @@
 .Dropdown-root {
     position: relative;
     width: 90%;
-    min-width: 50px;
+    min-width: 70px;
   }
   
   .Dropdown-control {
@@ -52,14 +52,14 @@
     overflow-y: auto;
     position: absolute;
     top: 100%;
-    width: 60%;
+    width: 98%;
     z-index: 1000;
     -webkit-overflow-scrolling: touch;
   }
   
   .Dropdown-menu .Dropdown-group > .Dropdown-title {
     padding: 8px 10px;
-    color: rgba(51, 51, 51, 1.2);
+    color: #00838f;
     font-weight: bold;
     text-transform: capitalize;
   }

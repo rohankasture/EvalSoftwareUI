@@ -177,7 +177,6 @@ class Detail extends Component {
 										onBlur={this.props.handleChange}
 										onChange={this.props.handleChange}
 										margin="normal"
-										multiline={true}
 										rows={7}
 										rowsMax={7}
 										className={classes.textField}

@@ -1,11 +1,9 @@
 import React, { Component } from "react";
-import "./Tile.css";
 import Divider from '@material-ui/core/Divider';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Avatar from '@material-ui/core/Avatar';
 import deepPurple from '@material-ui/core/colors/deepPurple';
-import deepOrange from '@material-ui/core/colors/deepOrange';
 import { withStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
 import iconImg from '../Images/icon.png'
@@ -58,13 +56,13 @@ class Tile extends Component {
 	};
 
 	render() {
-		const { provided, innerRef } = this.props;
 		const { classes } = this.props;
 		return (
 
 			<React.Fragment> 
 				<ListItem className= {(this.props.id == this.props.selected_id)?classes.tilecolor2:classes.tilecolor} button onClick={this.props.onClick} >
-					<Avatar className={classes.avatar}>{this.props.initials}
+					<Avatar className={classes.avatar}>
+						{this.props.initials}
 					</Avatar>
 					<ListItemText primary={this.props.name} />
 					{this.props.doneflag && <Avatar alt="No" src={iconImg} className={classes.imageavatar}/>}
