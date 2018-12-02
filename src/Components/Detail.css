@@ -1,77 +1,8 @@
-.mainContainer{
-    height: 420px;
-    width: auto;
-    border: 1.5px solid black;
-    padding-top: 1%;
-  }
 
-.container{
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
-    height: 13%;
-    width: auto;
-}
-
-.labelStyle{
-    display: inline-block;
-    width  : 15%;
-    height: auto;
-    vertical-align: top;
-    text-align: left;
-    margin-left:20%;
-    margin-right: 5%; 
-    
-}
-
-.inputStyle{
-    display: inline-block;
-    width: 60%;
-    height: auto;
-}
-
-.descriptionContainer{
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: flex-start;
-    padding-top: 5%;
-    width: auto;
-    height: 40%;
-}
-
-.desInputStyle{
-    display: inline-block;
-    width: 60%;
-    height: auto;
-}
-
-.buttonDivStyle{
-    align-content: center;
-    width: auto;
-    height:10%;
-}
-
-.buttonStyle{
-    width: 100px;
-    height: 30px;
-    font-weight: bold;
-}
-.tokenStyle{
-  margin-left: 200px;
-}
-.adjectiveStyle{
-  margin-left: 120px;
-}
-.descriptionStyle{
-  margin-left: 100px;
-}
 .Dropdown-root {
     position: relative;
-    width: 40%;
+    width: 90%;
     min-width: 50px;
-    padding-left: 25%;
   }
   
   .Dropdown-control {

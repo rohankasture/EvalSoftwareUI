@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Detail from './Detail';
 import ButtonAppBar from './ButtonAppBar';
-import './MainPage.css';
 import axios from 'axios';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import muiTheme from './Theme.js';
@@ -32,6 +31,21 @@ const styles = theme => ({
 		maxHeight: '600px',
 		overflowY: 'auto',
 	},
+	button: {
+        marginTop: theme.spacing.unit * 3,
+        marginLeft: theme.spacing.unit,
+        marginBottom: theme.spacing.unit,
+        width: '100px',
+        height: '30px',
+
+	},
+	tokenDiv:{
+		display: 'flex',
+		justifyContent: 'flex-end',
+	},
+	token:{
+		marginRight : theme.spacing.unit*3
+	}
 
 });
 class MainPage extends Component {
@@ -263,14 +277,15 @@ class MainPage extends Component {
 						<Typography variant="h4" color="textPrimary">
 							Hello {name}
 						</Typography>
-						<Typography className = "tokenDisplay" variant="h6" color="textPrimary">
-						 Tokens Left: {remaining} 
-						</Typography>
+						<div className={classes.tokenDiv}>
+							<Typography className={classes.token} variant="h6" color="textPrimary">
+								Tokens Left: {remaining}
+							</Typography>
+						</div>
 					</Grid>
 
 					<Grid item className={classes.gridRoot} direction="row" justify="center" alignItems="" alignContent="center">
 						<Grid container direction="row" justify="" alignItems="" alignContent="center" spacing={40}>
-
 							<Grid item direction="row" justify="center" alignItems="flex-start">
 								<Card className={classes.card}>
 									<CardContent>
@@ -323,7 +338,7 @@ class MainPage extends Component {
 						</Grid>
 					</Grid>
 					<Grid item direction="row" justify="center" alignItems="center" >
-						<Button color="primary" variant='contained' className="buttonStyle" onClick={this.handleSubmit}> Submit</Button>
+						<Button color="primary" variant='contained' className={classes.button} onClick={this.handleSubmit}> Submit</Button>
 					</Grid>
 				</Grid>
 			</MuiThemeProvider>

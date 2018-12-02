@@ -1,37 +1,42 @@
 import React, { Component } from "react";
-import "./Detail.css";
 import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions'
 import CardContent from '@material-ui/core/CardContent';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import { Grid, Typography, Table, TableBody,TableCell,TableRow,TableHead } from "@material-ui/core";
+import { Grid, Typography, Table, TableBody, TableCell, TableRow, TableHead } from "@material-ui/core";
 import Radio from '@material-ui/core/Radio';
 import Detail from './Detail';
 
 const styles = theme => ({
     card: {
         height: '90%',
-        maxHeight:'600px',
+        maxHeight: '700px',
         width: '100%',
         minWidth: '750px',
         overflow: 'auto'
     },
-    table:{
+    table: {
         height: '70%',
     },
     content: {
         height: '90%',
-        overflow:'auto'
     },
     actions: {
         display: 'flex',
         justifyContent: 'flex-end',
     },
     button: {
-        marginTop: theme.spacing.unit ,
+        marginTop: theme.spacing.unit * 3,
         marginLeft: theme.spacing.unit,
+        marginBottom: theme.spacing.unit,
+        width: '100px',
+        height: '30px',
+
+    },
+    buttons: {
+        display: 'flex',
+        justifyContent: 'flex-end',
     },
 
     text: {
@@ -43,18 +48,22 @@ const styles = theme => ({
         marginLeft: theme.spacing.unit,
         marginRight: theme.spacing.unit,
         width: "100%",
-    }
+    },
+    label: {
+        display: 'flex',
+        justifyContent: 'flex-end',
+    },
 
 });
 let id = 0;
-function createData(name,state_name) {
-  id += 1;
-  return { id, name ,state_name};
+function createData(name, state_name) {
+    id += 1;
+    return { id, name, state_name };
 }
 
 const rows = [
-    createData("Approachable","approachable_attitude") , createData("Communication","team_communication"), createData("Client Interaction","client_interaction"), createData("Decision Making","decision_making"), createData("Resource Utilization","resource_utilization"),createData("Follow up to completion","follow_up_to_completion"),
-    createData("Task Delegation & Ownership","task_delegation_and_ownership"),createData("Encourage Team Development","encourage_team_development"), createData("Realistic Expectation","realistic_expectation"),createData("Performance Under Stress","performance_under_stress")
+    createData("Approachable", "approachable_attitude"), createData("Communication", "team_communication"), createData("Client Interaction", "client_interaction"), createData("Decision Making", "decision_making"), createData("Resource Utilization", "resource_utilization"), createData("Follow up to completion", "follow_up_to_completion"),
+    createData("Task Delegation & Ownership", "task_delegation_and_ownership"), createData("Encourage Team Development", "encourage_team_development"), createData("Realistic Expectation", "realistic_expectation"), createData("Performance Under Stress", "performance_under_stress")
 ];
 
 
@@ -69,23 +78,22 @@ class Manager extends Component {
 
     render() {
         const { classes } = this.props;
-        if(this.props.back)
-        {
+        if (this.props.back) {
             console.log("change ui")
-            return(
-                <Detail  handleTokenChange = {this.props.handleTokenChange}
-										 handleAdjectiveChange ={this.props.handleAdjectiveChange}
-										 handleDone = {this.props.handleDone} 
-										 handleChange = {this.props.handleChange}
-										 sumTokenFlag = {this.props.sumTokenFlag}
-										 error = {this.props.error}
-										 selectedUser = {this.props.selectedUser}
-										 options={this.props.options}   
-										 handleNext ={this.props.handleNext}
-										 next ={this.props.next}
-										 token = {this.props.token}
-										 description ={this.props.description}
-								/>
+            return (
+                <Detail handleTokenChange={this.props.handleTokenChange}
+                    handleAdjectiveChange={this.props.handleAdjectiveChange}
+                    handleDone={this.props.handleDone}
+                    handleChange={this.props.handleChange}
+                    sumTokenFlag={this.props.sumTokenFlag}
+                    error={this.props.error}
+                    selectedUser={this.props.selectedUser}
+                    options={this.props.options}
+                    handleNext={this.props.handleNext}
+                    next={this.props.next}
+                    token={this.props.token}
+                    description={this.props.description}
+                />
             );
 
         }
@@ -113,11 +121,11 @@ class Manager extends Component {
                                 <TableBody>
                                     {rows.map(row => {
                                         return (
-                                            <TableRow key ={row.id}>
+                                            <TableRow key={row.id}>
                                                 <TableCell> {row.name}</TableCell>
                                                 <TableCell>
                                                     <Radio
-                                                        checked={this.props.selectedUser[row.state_name] ==='1'}
+                                                        checked={this.props.selectedUser[row.state_name] === '1'}
                                                         onChange={this.props.handleChange}
                                                         value="1"
                                                         name={row.state_name}
@@ -135,7 +143,7 @@ class Manager extends Component {
                                                 </TableCell>
                                                 <TableCell>
                                                     <Radio
-                                                        checked={this.props.selectedUser[row.state_name] ==='3'}
+                                                        checked={this.props.selectedUser[row.state_name] === '3'}
                                                         onChange={this.props.handleChange}
                                                         value="3"
                                                         name={row.state_name}
@@ -153,10 +161,10 @@ class Manager extends Component {
                                                 </TableCell>
                                                 <TableCell>
                                                     <Radio
-                                                        checked={ this.props.selectedUser[row.state_name] ==='5'}
+                                                        checked={this.props.selectedUser[row.state_name] === '5'}
                                                         onChange={this.props.handleChange}
                                                         value="5"
-                                                        name= {row.state_name}
+                                                        name={row.state_name}
                                                         aria-label="A"
                                                     />
                                                 </TableCell>
@@ -167,11 +175,20 @@ class Manager extends Component {
                             </Table>
                         </Grid>
                     </Grid>
+                    <Grid item>
+                      
+                            <div className={classes.label}>
+                                <Typography variant="body2" color="error" className={classes.text}>"Error"</Typography>
+                            </div>
+
+                            <div className={classes.buttons}>
+                                <Button color="secondary" variant='contained' className={classes.button} onClick={this.props.handleBack}> Back</Button>
+                                <Button color="secondary" variant='contained' className={classes.button} onClick={this.props.handleDone}> Done</Button>
+                            </div>
+                        
+                    </Grid>
+                    
                 </CardContent>
-                <CardActions className={classes.actions}>
-                    <Button color="secondary" variant='contained' className="buttonStyle" onClick={this.props.handleBack}> Back</Button>
-                    <Button color="secondary" variant='contained' className="buttonStyle" onClick={this.props.handleDone}> Done</Button>
-                </CardActions>
             </Card>
         );
     }
