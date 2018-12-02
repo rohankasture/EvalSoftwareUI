@@ -78,7 +78,7 @@ class Detail extends Component {
 		var {is_manager} = this.props.selectedUser;
 		if(this.props.next){
 			return(
-				<Manager back = {this.props.back} handleDone={this.props.handleDone} handleChange={this.props.handleChange} selectedUser ={this.props.selectedUser} handleBack = {this.props.handleBack}
+				<Manager back = {this.props.back} handleDone={this.props.handleDone} handleDescriptionChange={this.props.handleDescriptionChange} selectedUser ={this.props.selectedUser} handleBack = {this.props.handleBack}
 										handleTokenChange = {this.props.handleTokenChange}
 										 handleAdjectiveChange ={this.props.handleAdjectiveChange}
 										 sumTokenFlag = {this.props.sumTokenFlag}
@@ -175,8 +175,8 @@ class Detail extends Component {
 										variant="outlined"
 										name="description"
 										value={this.props.selectedUser.evaluation.description}
-										onBlur={this.props.handleChange}
-										onChange={this.props.handleChange}
+										onBlur={this.props.handleDescriptionChange}
+										onChange={this.props.handleDescriptionChange}
 										margin="normal"
 										rows={7}
 										rowsMax={7}

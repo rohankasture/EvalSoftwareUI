@@ -84,7 +84,7 @@ class Manager extends Component {
                 <Detail handleTokenChange={this.props.handleTokenChange}
                     handleAdjectiveChange={this.props.handleAdjectiveChange}
                     handleDone={this.props.handleDone}
-                    handleChange={this.props.handleChange}
+                    handleDescriptionChange={this.props.handleDescriptionChange}
                     sumTokenFlag={this.props.sumTokenFlag}
                     error={this.props.error}
                     selectedUser={this.props.selectedUser}

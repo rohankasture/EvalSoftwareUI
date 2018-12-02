@@ -157,7 +157,7 @@ class MainPage extends Component {
 			this.setState ({sumTokenFlag:false});
 		}	
 		let selected = Object.assign({}, this.state.selected);
-		selected.token = token;
+		selected.evaluation.token = token;
 		this.setState({selected});
 	}
 	handleAdjectiveChange = (event) => {
@@ -170,7 +170,7 @@ class MainPage extends Component {
 		this.setState(newState);
 
 		let selected = Object.assign({}, this.state.selected);
-		selected.adjective = event.label;
+		selected.evaluation.adjective = event.label;
 		this.setState({selected});
 	}
 
@@ -178,17 +178,17 @@ class MainPage extends Component {
 		let selected = Object.assign({}, this.state.selected);
 		let newState = Object.assign({}, this.state);
 		let flag = false;
-		if(selected.token == ""){
+		if(selected.evaluation.token == ""){
 			newState.token.error = "Token is Required";
 			newState.token.isValid = false;
 			flag = true;
 		}
-		if(selected.description == ""){
+		if(selected.evaluation.description == ""){
 			newState.description.error = "Description is Required";
 			newState.description.isValid = false;			
 			flag = true	;
 		}
-		if(selected.adjective == ""){
+		if(selected.evaluation.adjective == ""){
 			newState.adjective.error = "Adjective is Required";
 			newState.adjective.isValid = false;			
 			flag = true	;
@@ -209,7 +209,7 @@ class MainPage extends Component {
 		this.setState({data});
 		}
 	}
-	handleChange = (event) =>{
+	handleDescriptionChange = (event) =>{
 		let newState = Object.assign({}, this.state);
 		if(event.target.value == ""){
 		newState.description.error = "Description is Required";
@@ -224,7 +224,7 @@ class MainPage extends Component {
 
 		
 		let selected = Object.assign({}, this.state.selected);
-		selected[event.target.name] = event.target.value
+		selected.evaluation.description = event.target.value
         this.setState({selected})
 	}
 	
@@ -329,7 +329,7 @@ class MainPage extends Component {
 								<Detail  handleTokenChange = {this.handleTokenChange}
 										 handleAdjectiveChange ={this.handleAdjectiveChange}
 										 handleDone = {this.handleDone} 
-										 handleChange = {this.handleChange}
+										 handleDescriptionChange = {this.handleDescriptionChange}
 										 handleManagerChange = {this.handleManagerChange}
 										 sumTokenFlag = {this.state.sumTokenFlag}
 										 error = {this.state.error}
