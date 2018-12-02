@@ -57,6 +57,7 @@ class Tile extends Component {
 
 	render() {
 		const { classes } = this.props;
+		const name = this.props.first_name +" "+ this.props.last_name
 		return (
 
 			<React.Fragment> 
@@ -64,10 +65,10 @@ class Tile extends Component {
 					<Avatar className={classes.avatar}>
 						{this.props.initials}
 					</Avatar>
-					<ListItemText primary={this.props.name} />
-					{this.props.doneflag && <Avatar alt="No" src={iconImg} className={classes.imageavatar}/>}
+					<ListItemText primary={name} />
+					{this.props.is_complete && <Avatar alt="No" src={iconImg} className={classes.imageavatar}/>}
 				</ListItem>
-				<Divider className={classes.divider} backgroundColor="#00838f" />
+				<Divider className={classes.divider} backgroundcolor="#00838f" />
 			</React.Fragment>
 		);
 	}

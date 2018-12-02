@@ -52,15 +52,9 @@ class MainPage extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			data: [
-				{ rank: 1, initials: 'RK', name: 'Rohan Kasture', token: '', adjective: '', description: '', userId: 'rkasture',doneFlag : false,is_manager: "0"},
-				{ rank: 2, initials: 'AA', name: 'Ankita Alshi', token: '', adjective: '', description: '', userId: 'aralshi' ,doneFlag : false, is_manager: "0"},
-				{ rank: 3, initials: 'RM', name: 'Rocco Manzo', token: '', adjective: '', description: '', userId: 'rmanzo',doneFlag : false , is_manager : "1"},
-				{ rank: 4, initials: 'SB', name: 'Shradha Baranwal', token: '', adjective: '', description: '', userId: 'sbaranwa',doneFlag : false, is_manager: "0" },
-				{ rank: 5, initials: 'RD', name: 'Ramya DG', token: '', adjective: '', description: '', userId: 'ramyaDG',doneFlag : false, is_manager : "0"},
-				{ rank: 6, initials: 'SK', name: 'Shweta Kulkarni', token: '', adjective: '', description: '', userId: 'svkul' ,doneFlag : false ,is_manager : "0"},
-			],
-			selected: "",
+			data: [],
+			selected: {
+			},
 			options: [
 				{
 					type: 'group', name: 'Good Adjectives', items: [
@@ -114,8 +108,10 @@ class MainPage extends Component {
 					crossDomain: true
 				}
 			})
-			//   .then(res => this.setState({ posts: res.data }))
-			.then(res => console.log(res)) 
+			.then(res => {
+				this.setState({data: res.data.team})
+				this.setState({selected: res.data.team[0]})
+			}) 
 				// this.setState({ options: res.data.BadAjectives }))
 			.catch(err => console.log(err))
 	}
@@ -203,13 +199,13 @@ class MainPage extends Component {
 		if(!flag){
 		//For Done Avatar
 		let selected = this.state.selected;
-		selected.doneFlag = true;
+		selected.is_complete = true;
 		this.setState({selected})
 		let total = this.state.total
 		total = total + parseInt(this.state.selected.token)
 		this.setState({total}) 
 		let data = this.state.data;
-		data[this.state.selected.rank-1] = this.state.selected;
+		data[this.state.selected.evaluation.rank-1] = this.state.selected;
 		this.setState({data});
 		}
 	}
@@ -226,12 +222,17 @@ class MainPage extends Component {
 		}
 		this.setState(newState);
 
-		console.log(event.target)
+		
 		let selected = Object.assign({}, this.state.selected);
 		selected[event.target.name] = event.target.value
         this.setState({selected})
 	}
 	
+	handleManagerChange =(event) =>{
+		let selected = Object.assign({}, this.state.selected);
+		selected.manager[event.target.name] = event.target.value
+        this.setState({selected})
+	}
 	reorder = (list, startIndex, endIndex) => {
 		const result = Array.from(list);
 		const [removed] = result.splice(startIndex, 1);
@@ -266,7 +267,94 @@ class MainPage extends Component {
 		});
 	};
 
-	render() {
+	render(){
+		const { classes } = this.props;
+		var name = localStorage.getItem('name');
+		var remaining = 100 - this.state.total;
+		var selected = this.state.selected;
+		if (selected == undefined){
+			return(<div>
+			</div>)
+		}
+		return(
+			<MuiThemeProvider theme={muiTheme}>
+				<ButtonAppBar />
+				<br />
+				<Grid container direction="column" justify="flex-start"  spacing={40}>
+					<Grid item >
+
+						<Typography variant="h4" color="textPrimary">
+							Hello {name}
+						</Typography>
+						<div className={classes.tokenDiv}>
+							<Typography className={classes.token} variant="h6" color="textPrimary">
+								Tokens Left: {remaining}
+							</Typography>
+						</div>
+					</Grid>
+					<Grid item className={classes.gridRoot}>
+						<Grid container direction="row" justify="center" alignItems="center" alignContent="center" spacing={40}>
+							<Grid item>
+								<Card className={classes.card}>
+									<CardContent>
+										<DragDropContext onDragEnd={this.onDragEnd}>
+											<Droppable droppableId="droppable">
+												{
+													(provided, snapshot) => (
+														<div
+															ref={provided.innerRef}>
+																<List className={classes.listRoot} component="nav">
+																	{this.state.data.map((user, index) => (
+																		<Draggable key={user.username} draggableId={user.username} index={index}>
+																			{(provided, snapshot) => (
+																				<div
+																					ref={provided.innerRef}
+																					{...provided.draggableProps}
+																					{...provided.dragHandleProps}>		
+																					<Tile  is_complete={user.is_complete}  selected_id = {this.state.selected.evaluation.rank-1} id = {user.evaluation.rank-1} rank ={user.evaluation.rank} first_name={user.first_name} last_name ={user.last_name} initials={user.initials} onClick={() => this.handleOnClick(index)} />
+																				</div>
+																			)}
+																		</Draggable>
+																	))}
+																	{provided.placeholder}
+																</List>
+														</div>
+													)}
+											</Droppable>
+										</DragDropContext>
+									</CardContent>
+								</Card>
+							</Grid>
+							<Grid item className={classes.cardGrid} direction="row" justify="center" alignItems="center">
+								<Detail  handleTokenChange = {this.handleTokenChange}
+										 handleAdjectiveChange ={this.handleAdjectiveChange}
+										 handleDone = {this.handleDone} 
+										 handleChange = {this.handleChange}
+										 handleManagerChange = {this.handleManagerChange}
+										 sumTokenFlag = {this.state.sumTokenFlag}
+										 error = {this.state.error}
+										 selectedUser = {this.state.selected}
+										 options={this.state.options}   
+										 handleNext ={this.handleNext}
+										 handleBack = {this.handleBack}
+										 back = {this.state.back}
+										 next ={this.state.next}
+										 token = {this.state.token}
+										 description ={this.state.description}
+										 adjective = {this.state.adjective}
+								/>
+								</Grid>
+						</Grid>
+					</Grid>
+					<Grid item  >
+						<Button color="primary" variant='contained' className={classes.button} onClick={this.handleSubmit}> Submit</Button>
+					</Grid>
+				</Grid>
+			</MuiThemeProvider>
+		);
+		
+	}
+	render1() {
 		const { classes } = this.props;
 		var name = localStorage.getItem('name');
 		var remaining = 100 - this.state.total;
@@ -306,7 +394,7 @@ class MainPage extends Component {
 																					ref={provided.innerRef}
 																					{...provided.draggableProps}
 																					{...provided.dragHandleProps}>																			
-																					<Tile doneflag = {user.doneFlag} selected_id = {this.state.selected.rank-1} name={user.name} initials={user.initials} rank ={user.rank} id = {user.rank-1} onClick={() => this.handleOnClick(index)} />
+																					<Tile is_complete = {user.doneFlag} selected_id = {this.state.selected.rank-1} name={user.name} initials={user.initials} rank ={user.rank} id = {user.rank-1} onClick={() => this.handleOnClick(index)} />
 																				</div>
 																			)}
 																		</Draggable>

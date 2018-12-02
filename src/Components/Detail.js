@@ -88,6 +88,7 @@ class Detail extends Component {
 										 next ={this.props.next}
 										 token = {this.props.token}
 										 description ={this.props.description}
+										 handleManagerChange = {this.props.handleManagerChange}
 				
 				/>
 			);
@@ -112,7 +113,7 @@ class Detail extends Component {
 										<Input
 											required
 											name="Rank"
-											value={this.props.selectedUser.rank}
+											value={this.props.selectedUser.evaluation.rank}
 											className ={classes.input}
 											InputProps={{
 												readOnly: true,
@@ -134,7 +135,7 @@ class Detail extends Component {
 									<Input
 										required
 										name="Token"
-										value={this.props.selectedUser.token}
+										value={this.props.selectedUser.evaluation.token}
 										onBlur={(event) => { this.props.handleTokenChange(event.target.defaultValue) }} //event.persist();
 										onChange={(event) => this.props.handleTokenChange(event.target.value)}
 										className={classes.input}
@@ -153,7 +154,7 @@ class Detail extends Component {
 										</Typography>
 								</div>
 								<div className={classes.input}>
-									<Dropdown options={this.props.options} onChange={this.props.handleAdjectiveChange} value={this.props.selectedUser.adjective} placeholder="Select an adjective" ></Dropdown>
+									<Dropdown options={this.props.options} onChange={this.props.handleAdjectiveChange} value={this.props.selectedUser.evaluation.adjective} placeholder="Select an adjective" ></Dropdown>
 									{!this.props.adjective.isValid && <Typography  variant="body2" color="error">{this.props.adjective.error}</Typography>}
 								</div>
 							</Grid>
@@ -173,7 +174,7 @@ class Detail extends Component {
 										multiline
 										variant="outlined"
 										name="description"
-										value={this.props.selectedUser.description}
+										value={this.props.selectedUser.evaluation.description}
 										onBlur={this.props.handleChange}
 										onChange={this.props.handleChange}
 										margin="normal"

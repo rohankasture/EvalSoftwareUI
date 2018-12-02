@@ -93,6 +93,7 @@ class Manager extends Component {
                     next={this.props.next}
                     token={this.props.token}
                     description={this.props.description}
+                    handleManagerChange = {this.props.handleManagerChange}
                 />
             );
 
@@ -125,8 +126,8 @@ class Manager extends Component {
                                                 <TableCell> {row.name}</TableCell>
                                                 <TableCell>
                                                     <Radio
-                                                        checked={this.props.selectedUser[row.state_name] === '1'}
-                                                        onChange={this.props.handleChange}
+                                                        checked={this.props.selectedUser.manager[row.state_name] === '1'}
+                                                        onChange={this.props.handleManagerChange}
                                                         value="1"
                                                         name={row.state_name}
                                                         aria-label="A"
@@ -134,8 +135,8 @@ class Manager extends Component {
                                                 </TableCell>
                                                 <TableCell>
                                                     <Radio
-                                                        checked={this.props.selectedUser[row.state_name] === '2'}
-                                                        onChange={this.props.handleChange}
+                                                        checked={this.props.selectedUser.manager[row.state_name] === '2'}
+                                                        onChange={this.props.handleManagerChange}
                                                         value="2"
                                                         name={row.state_name}
                                                         aria-label="A"
@@ -143,8 +144,8 @@ class Manager extends Component {
                                                 </TableCell>
                                                 <TableCell>
                                                     <Radio
-                                                        checked={this.props.selectedUser[row.state_name] === '3'}
-                                                        onChange={this.props.handleChange}
+                                                        checked={this.props.selectedUser.manager[row.state_name] === '3'}
+                                                        onChange={this.props.handleManagerChange}
                                                         value="3"
                                                         name={row.state_name}
                                                         aria-label="A"
@@ -152,8 +153,8 @@ class Manager extends Component {
                                                 </TableCell>
                                                 <TableCell>
                                                     <Radio
-                                                        checked={this.props.selectedUser[row.state_name] === '4'}
-                                                        onChange={this.props.handleChange}
+                                                        checked={this.props.selectedUser.manager[row.state_name] === '4'}
+                                                        onChange={this.props.handleManagerChange}
                                                         value="4"
                                                         name={row.state_name}
                                                         aria-label="A"
@@ -161,8 +162,8 @@ class Manager extends Component {
                                                 </TableCell>
                                                 <TableCell>
                                                     <Radio
-                                                        checked={this.props.selectedUser[row.state_name] === '5'}
-                                                        onChange={this.props.handleChange}
+                                                        checked={this.props.selectedUser.manager[row.state_name] === '5'}
+                                                        onChange={this.props.handleManagerChange}
                                                         value="5"
                                                         name={row.state_name}
                                                         aria-label="A"
