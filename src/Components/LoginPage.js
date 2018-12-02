@@ -124,6 +124,7 @@ class Login extends Component {
           else {
             let name = res['data']['first_name'] + ' ' + res['data']['last_name'] + '!'
             localStorage.setItem('name',name);   
+            localStorage.setItem('auth_token',res['data']['auth_token']);
             window.location.assign('/mainpage');
           
           }

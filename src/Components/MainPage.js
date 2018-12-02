@@ -102,9 +102,12 @@ class MainPage extends Component {
 	}
 
 	componentWillMount() {
+		var token ={
+			"auth_token" : localStorage.getItem('auth_token')
+		};
 		this.setState({selected:this.state.data[0]});
 		axios
-			.get(`https://localhost:55555/team`, {
+			.post(`https://localhost:55555/team`,token,{
 				headers: {
 					"Content-Type": "application/json",
 					"Access-Control-Allow-Origin": "*",
