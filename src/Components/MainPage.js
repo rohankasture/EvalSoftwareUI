@@ -16,6 +16,7 @@ import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 
+
 const styles = theme => ({
 	listRoot: {
 		width: '100%',
@@ -276,12 +277,16 @@ class MainPage extends Component {
 		const { classes } = this.props;
 		var name = localStorage.getItem('name');
 		var total = 0;
+
 		this.state.data.forEach(function(d) {
 			if(d.is_complete === true){
-				total = total + parseInt(d.evaluation.tokens);
-			}
+        if(d.evaluation.tokens!=""){
+				  total = total + parseInt(d.evaluation.tokens);
+			  }
+      }
 		});
-		var remaining = 100 - total;
+		var remaining = 100 - parseInt(total);
+
 		var selected = this.state.selected;
 		if (selected === undefined){
 			return(<div>
