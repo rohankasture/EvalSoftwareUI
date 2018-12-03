@@ -51,12 +51,25 @@ const styles = theme => ({
 class MainPage extends Component {
 	constructor(props) {
 		super(props);
+		var manager_obj = {
+		"approachable_attitude": 1,
+		"client_interaction": 1,
+		"decision_making": 1,
+		"encourage_team_development": 1,
+		"follow_up_to_completion": 1,
+		"mgr_description": 1,
+		"performance_under_stress": 1,
+		"realistic_expectation": 1,
+		"resource_utilization": 1,
+		"task_delegation_and_ownership": 1,
+		"team_communication": 1
+		};
 		this.state = {
 			data: [
 				{ rank: 1, initials: 'RK', name: 'Rohan Kasture', token: '', adjective: '', description: '', userId: 'rkasture',doneFlag : false,is_manager: "0"},
 				{ rank: 2, initials: 'AA', name: 'Ankita Alshi', token: '', adjective: '', description: '', userId: 'aralshi' ,doneFlag : false, is_manager: "0"},
-				{ rank: 3, initials: 'RM', name: 'Rocco Manzo', token: '', adjective: '', description: '', userId: 'rmanzo',doneFlag : false , is_manager : "1"},
-				{ rank: 4, initials: 'SB', name: 'Shradha Baranwal', token: '', adjective: '', description: '', userId: 'sbaranwa',doneFlag : false, is_manager: "0" },
+				{ rank: 3, initials: 'RM', name: 'Rocco Manzo', token: '', adjective: '', description: '', userId: 'rmanzo',doneFlag : false , is_manager : "0"},
+				{ rank: 4, initials: 'SB', name: 'Shradha Baranwal', token: '', adjective: '', description: '', userId: 'sbaranwa',doneFlag : false, is_manager: "1", manager :manager_obj},
 				{ rank: 5, initials: 'RD', name: 'Ramya DG', token: '', adjective: '', description: '', userId: 'ramyaDG',doneFlag : false, is_manager : "0"},
 				{ rank: 6, initials: 'SK', name: 'Shweta Kulkarni', token: '', adjective: '', description: '', userId: 'svkul' ,doneFlag : false ,is_manager : "0"},
 			],
@@ -197,7 +210,17 @@ class MainPage extends Component {
 			newState.adjective.isValid = false;			
 			flag = true	;
 		}
-
+		if(selected.is_manager == "1"){
+			console.log("In manager")
+			console.log(selected)	
+			console.log(selected.manager)
+			for(var key in selected.manager){
+				if(selected.manager[key] == -1){
+				  flag = true;
+				  break;
+				}
+			}
+		}
 		this.setState(newState);
 		
 		if(!flag){
