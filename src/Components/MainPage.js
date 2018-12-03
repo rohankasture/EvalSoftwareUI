@@ -179,7 +179,7 @@ class MainPage extends Component {
 		let selected = Object.assign({}, this.state.selected);
 		let newState = Object.assign({}, this.state);
 		let flag = false;
-		if(selected.evaluation.token === ""){
+		if(selected.evaluation.tokens === ""){
 			newState.token.error = "Token is Required";
 			newState.token.isValid = false;
 			flag = true;
