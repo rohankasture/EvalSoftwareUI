@@ -110,6 +110,7 @@ class MainPage extends Component {
 				}
 			})
 			.then(res => {
+				localStorage.setItem("week",res.data.week)
 				this.setState({data: res.data.team})
 				this.setState({selected:JSON.parse(JSON.stringify(res.data.team[0])) })
 				this.addAdjective('Good Adjectives',res.data.good_adjectives)
@@ -254,7 +255,24 @@ class MainPage extends Component {
 	};
 
 	handleSubmit = (event)=>{
-			console.log(event)
+			var body ={
+			"auth_token" : localStorage.getItem('auth_token'),
+			"team" : this.state.data,
+			"week" : localStorage.getItem('week')
+		};
+		axios
+		.post(`https://localhost:55555/evaluations`,body,{
+			headers: {
+				"Content-Type": "application/json",
+				"Access-Control-Allow-Origin": "*",
+				crossDomain: true
+			}
+		})
+		.then(res => {
+			console.log("successful")
+			console.log(res)
+		}) 
+		.catch(err => console.log(err))
 	};
 
 	onDragEnd = (result) => {
