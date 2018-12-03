@@ -15,5 +15,8 @@ export default createMuiTheme(
             typography: {
                   useNextVariants: true,
             },
+            background: {
+                  default: "#848484"
+            }
       });
 
