@@ -14,7 +14,7 @@ import Tile from './Tile'
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
-
+import CssBaseline from '@material-ui/core/CssBaseline';
 
 const styles = theme => ({
 	listRoot: {
@@ -281,6 +281,7 @@ class MainPage extends Component {
 		}
 		return(
 			<MuiThemeProvider theme={muiTheme}>
+			<CssBaseline />
 				<ButtonAppBar />
 				<br />
 				<Grid container direction="column" justify="flex-start"  spacing={40}>
@@ -290,7 +291,7 @@ class MainPage extends Component {
 							Hello {name}
 						</Typography>
 						<div className={classes.tokenDiv}>
-							<Typography className={classes.token} variant="h6" color="textPrimary">
+							<Typography className={classes.token} variant="h5" color="textPrimary">
 								Tokens Left: {remaining}
 							</Typography>
 						</div>
