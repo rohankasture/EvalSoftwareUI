@@ -69,7 +69,7 @@ class Login extends Component {
   handleChangeUserName(event) {
     let newState = Object.assign({}, this.state);
     newState.loginFlag = false;
-    if(event.target.value == ""){
+    if(event.target.value === ""){
       newState.username.error = "Username is Required";
       newState.username.isValid = false;
     }
@@ -83,7 +83,7 @@ class Login extends Component {
   handleChangePassword(event) {
     let newState = Object.assign({}, this.state);
     newState.loginFlag = false;
-    if(event.target.value == ""){
+    if(event.target.value === ""){
       newState.password.error = "Password is Required";
       newState.password.isValid = false;
       
@@ -114,10 +114,7 @@ class Login extends Component {
       })
       .then(
         function (res) {
-          // console.log(res['data']['status_code']);
-          if( res['data']['status_code'] != 200){
-            // alert("Invalid credentials");  
-            // window.location.assign('/'); 
+          if( res['data']['status_code'] !== 200){
             this.setState({loginFlag:true});
             this.setState({error_message:res['data']['log']}); 
           }  

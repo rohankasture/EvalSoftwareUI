@@ -53,22 +53,8 @@ class MainPage extends Component {
 		super(props);
 		this.state = {
 			data: [],
-			selected: {
-			},
-			options: [
-				{
-					type: 'group', name: 'Good Adjectives', items: [
-						{ value: 'three', label: 'Brilliant' },
-						{ value: 'four', label: 'Professional' }
-					]
-				},
-				{
-					type: 'group', name: 'Bad Adjectives', items: [
-						{ value: 'five', label: 'Unreliable' },
-						{ value: 'six', label: 'Useless' }
-					]
-				}
-			],
+			selected: {},
+			options: [],
 			total : 0,
 			sumTokenFlag : false,
 			error : "",
@@ -94,6 +80,20 @@ class MainPage extends Component {
 		this.handleDone = this.handleDone.bind(this);
 		this.handleAdjectiveChange = this.handleAdjectiveChange.bind(this);
 	}
+	 
+	addAdjective= (adjectiveName,adjectiveList)=>{
+		var adjectives =[]
+		adjectiveList.forEach(function(element) {
+			var item ={ value: element, label: element}
+			adjectives.push(item)
+		});
+		var option = {
+			type: 'group', name: adjectiveName, items: adjectives
+		}
+		let options = this.state.options
+		options.push(option)
+		this.setState({options: options})
+	}
 
 	componentWillMount() {
 		var token ={
@@ -110,9 +110,10 @@ class MainPage extends Component {
 			})
 			.then(res => {
 				this.setState({data: res.data.team})
-				this.setState({selected: res.data.team[0]})
+				this.setState({selected:JSON.parse(JSON.stringify(res.data.team[0])) })
+				this.addAdjective('Good Adjectives',res.data.good_adjectives)
+				this.addAdjective('Bad Adjectives',res.data.bad_adjectives)
 			}) 
-				// this.setState({ options: res.data.BadAjectives }))
 			.catch(err => console.log(err))
 	}
 
@@ -125,7 +126,7 @@ class MainPage extends Component {
 		this.setState(newState);
 		
 		this.setState({next:false})
-		this.setState({ selected: this.state.data[id] });
+		this.setState({ selected: JSON.parse(JSON.stringify(this.state.data[id])) });
 	}
 	handleNext = ()=>
 	{
@@ -138,7 +139,7 @@ class MainPage extends Component {
 	}
 	handleTokenChange = (token) => {
 		let newState = Object.assign({}, this.state);
-		if(token == ""){
+		if(token === ""){
 		newState.token.error = "Token is Required";
 		newState.token.isValid = false;
 		}
@@ -157,12 +158,12 @@ class MainPage extends Component {
 			this.setState ({sumTokenFlag:false});
 		}	
 		let selected = Object.assign({}, this.state.selected);
-		selected.evaluation.token = token;
+		selected.evaluation.tokens = token;
 		this.setState({selected});
 	}
 	handleAdjectiveChange = (event) => {
 		let newState = Object.assign({}, this.state);
-		if(event.label != ""){
+		if(event.label !== ""){
 		newState.adjective.value = event.label;
 		newState.adjective.error = "";
 		newState.adjective.isValid = true;
@@ -178,17 +179,17 @@ class MainPage extends Component {
 		let selected = Object.assign({}, this.state.selected);
 		let newState = Object.assign({}, this.state);
 		let flag = false;
-		if(selected.evaluation.token == ""){
+		if(selected.evaluation.token === ""){
 			newState.token.error = "Token is Required";
 			newState.token.isValid = false;
 			flag = true;
 		}
-		if(selected.evaluation.description == ""){
+		if(selected.evaluation.description === ""){
 			newState.description.error = "Description is Required";
 			newState.description.isValid = false;			
 			flag = true	;
 		}
-		if(selected.evaluation.adjective == ""){
+		if(selected.evaluation.adjective === ""){
 			newState.adjective.error = "Adjective is Required";
 			newState.adjective.isValid = false;			
 			flag = true	;
@@ -202,7 +203,7 @@ class MainPage extends Component {
 		selected.is_complete = true;
 		this.setState({selected})
 		let total = this.state.total
-		total = total + parseInt(this.state.selected.token)
+		total = total + parseInt(this.state.selected.evaluation.tokens)
 		this.setState({total}) 
 		let data = this.state.data;
 		data[this.state.selected.evaluation.rank-1] = this.state.selected;
@@ -211,7 +212,7 @@ class MainPage extends Component {
 	}
 	handleDescriptionChange = (event) =>{
 		let newState = Object.assign({}, this.state);
-		if(event.target.value == ""){
+		if(event.target.value === ""){
 		newState.description.error = "Description is Required";
 		newState.description.isValid = false;
 		}
@@ -233,6 +234,7 @@ class MainPage extends Component {
 		selected.manager[event.target.name] = event.target.value
         this.setState({selected})
 	}
+
 	reorder = (list, startIndex, endIndex) => {
 		const result = Array.from(list);
 		const [removed] = result.splice(startIndex, 1);
@@ -240,7 +242,7 @@ class MainPage extends Component {
 
 
 		var mapUser = result.map((user, index) => {
-			user.rank = index + 1
+			user.evaluation.rank = index + 1
 			return user;
 		});
 
@@ -251,6 +253,7 @@ class MainPage extends Component {
 	handleSubmit = (event)=>{
 			console.log(event)
 	};
+
 	onDragEnd = (result) => {
 		if (!result.destination) {
 			return;
@@ -272,7 +275,7 @@ class MainPage extends Component {
 		var name = localStorage.getItem('name');
 		var remaining = 100 - this.state.total;
 		var selected = this.state.selected;
-		if (selected == undefined){
+		if (selected === undefined){
 			return(<div>
 			</div>)
 		}
@@ -311,7 +314,7 @@ class MainPage extends Component {
 																					ref={provided.innerRef}
 																					{...provided.draggableProps}
 																					{...provided.dragHandleProps}>		
-																					<Tile  is_complete={user.is_complete}  selected_id = {this.state.selected.evaluation.rank-1} id = {user.evaluation.rank-1} rank ={user.evaluation.rank} first_name={user.first_name} last_name ={user.last_name} initials={user.initials} onClick={() => this.handleOnClick(index)} />
+																					<Tile  is_complete={user.is_complete}  selected_id = {this.state.selected.evaluation.rank-1} id = {user.evaluation.rank-1}  first_name={user.first_name} last_name ={user.last_name} initials={user.initials} onClick={() => this.handleOnClick(index)} />
 																				</div>
 																			)}
 																		</Draggable>
@@ -325,7 +328,7 @@ class MainPage extends Component {
 									</CardContent>
 								</Card>
 							</Grid>
-							<Grid item className={classes.cardGrid} direction="row" justify="center" alignItems="center">
+							<Grid item className={classes.cardGrid} >
 								<Detail  handleTokenChange = {this.handleTokenChange}
 										 handleAdjectiveChange ={this.handleAdjectiveChange}
 										 handleDone = {this.handleDone} 

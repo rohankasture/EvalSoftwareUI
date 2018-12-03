@@ -61,7 +61,7 @@ class Tile extends Component {
 		return (
 
 			<React.Fragment> 
-				<ListItem className= {(this.props.id == this.props.selected_id)?classes.tilecolor2:classes.tilecolor} button onClick={this.props.onClick} >
+				<ListItem className= {(this.props.id === this.props.selected_id)?classes.tilecolor2:classes.tilecolor} button onClick={this.props.onClick} >
 					<Avatar className={classes.avatar}>
 						{this.props.initials}
 					</Avatar>

@@ -135,7 +135,7 @@ class Detail extends Component {
 									<Input
 										required
 										name="Token"
-										value={this.props.selectedUser.evaluation.token}
+										value={this.props.selectedUser.evaluation.tokens}
 										onBlur={(event) => { this.props.handleTokenChange(event.target.defaultValue) }} //event.persist();
 										onChange={(event) => this.props.handleTokenChange(event.target.value)}
 										className={classes.input}
@@ -154,7 +154,7 @@ class Detail extends Component {
 										</Typography>
 								</div>
 								<div className={classes.input}>
-									<Dropdown options={this.props.options} onChange={this.props.handleAdjectiveChange} value={this.props.selectedUser.evaluation.adjective} placeholder="Select an adjective" ></Dropdown>
+									<Dropdown options={this.props.options} onChange={this.props.handleAdjectiveChange} value={this.props.selectedUser.evaluation.adjective} placeholder="Select" ></Dropdown>
 									{!this.props.adjective.isValid && <Typography  variant="body2" color="error">{this.props.adjective.error}</Typography>}
 								</div>
 							</Grid>
