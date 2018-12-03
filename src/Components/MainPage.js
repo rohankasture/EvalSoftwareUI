@@ -276,11 +276,11 @@ class MainPage extends Component {
 		const { classes } = this.props;
 		var name = localStorage.getItem('name');
 		var total = 0;
-		{this.state.data.map((d,i)=>{
-			if(d.is_complete == true){
-					total = total + parseInt(d.evaluation.tokens);
+		this.state.data.forEach(function(d) {
+			if(d.is_complete === true){
+				total = total + parseInt(d.evaluation.tokens);
 			}
-		})}
+		});
 		var remaining = 100 - total;
 		var selected = this.state.selected;
 		if (selected === undefined){
