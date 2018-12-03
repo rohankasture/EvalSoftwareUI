@@ -30,7 +30,7 @@ const styles = theme => ({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    padding: `${theme.spacing.unit * 2}px ${theme.spacing.unit * 3}px ${theme.spacing.unit * 3}px`,
+    padding: `${theme.spacing.unit * 2}px ${theme.spacing.unit * 3}px ${theme.spacing.unit * 8}px`,
   },
   avatar: {
     margin: theme.spacing.unit,
@@ -169,6 +169,7 @@ class Login extends Component {
             >
               Sign in
             </Button>
+            <span><br/><br/><a href ="/signup">Create an Account</a></span>
           </form>
         </Paper>
       </main>

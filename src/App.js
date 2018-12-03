@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import LoginPage from "./Components/LoginPage";
 import MainPage from "./Components/MainPage";
+import SignUp from "./Components/SignUp"
 import './App.css';
 import { BrowserRouter, Route } from "react-router-dom";
 
@@ -27,6 +28,15 @@ class App extends Component {
             render={(res) => (       
               <div className="App">
                 <MainPage/>
+              </div>
+            )}
+          />
+          <Route
+            exact={true}
+            path="/signup"
+            render={(res) => (       
+              <div className="App">
+                <SignUp/>
               </div>
             )}
           />

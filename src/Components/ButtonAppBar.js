@@ -22,7 +22,11 @@ const styles = {
   },
 };
 
-
+function handleClick(){
+console.log("clicked logout")
+localStorage.removeItem('auth_token');
+window.location.assign('/');
+}
 function ButtonAppBar(props) {
   const { classes } = props;
   return (
@@ -35,7 +39,7 @@ function ButtonAppBar(props) {
           <Typography variant="h6" color="inherit" className={classes.grow} align = "left">
             Evaluation Software
           </Typography>
-          <Button color="inherit">Log out</Button>
+          <Button color="inherit" onClick = {handleClick}>Log out</Button>
         </Toolbar>
       </AppBar>
     </div>
