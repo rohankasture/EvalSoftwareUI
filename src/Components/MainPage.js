@@ -277,16 +277,16 @@ class MainPage extends Component {
 		const { classes } = this.props;
 		var name = localStorage.getItem('name');
 		var total = 0;
-		// var token_flag = false;
-		{this.state.data.map((d,i)=>{
-			if(d.is_complete == true){
-					if(d.evaluation.tokens!=""){
-						total = total + parseInt(d.evaluation.tokens);
-						}
-			}	
-		})}
 
-		var remaining = 100 -parseInt(total);
+		this.state.data.forEach(function(d) {
+			if(d.is_complete === true){
+        if(d.evaluation.tokens!=""){
+				  total = total + parseInt(d.evaluation.tokens);
+			  }
+      }
+		});
+		var remaining = 100 - parseInt(total);
+
 		var selected = this.state.selected;
 		if (selected === undefined){
 			return(<div>
