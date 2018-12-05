@@ -104,6 +104,7 @@ class Login extends Component {
       "username": username,
       "password": password
     };
+    console.log(loginData)
     axios
       .post("https://localhost:55555/login", loginData, {
         headers: {
@@ -114,6 +115,7 @@ class Login extends Component {
       })
       .then(
         function (res) {
+          console.log(res)
           if( res['data']['status_code'] !== 200){
             this.setState({loginFlag:true});
             this.setState({error_message:res['data']['log']}); 
