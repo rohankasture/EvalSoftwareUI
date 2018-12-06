@@ -57,7 +57,7 @@ class MainPage extends Component {
 			selected: {},
 			options: [],
 			total: 0,
-			sum: 0,
+			sumToken: 100,
 			sumTokenFlag: false,
 			error: "",
 			next: false,
@@ -119,7 +119,7 @@ class MainPage extends Component {
 				}
 				else{
 					localStorage.setItem("week",res.data.team[0].week)
-					this.setState({sum: res.data.team.length*10})
+					// this.setState({sumToken: res.data.team.length*10}) This can be used to make tokens proportional to team member
 					this.setState({data: res.data.team})
 					this.setState({selected:JSON.parse(JSON.stringify(res.data.team[0])) })
 					this.addAdjective('Good Adjectives',res.data.good_adjectives)
@@ -166,8 +166,8 @@ class MainPage extends Component {
 		this.setState(newState);
 		var sum = parseInt(token);
 		sum = sum + this.state.total;
-		if (sum > this.state.sum) {
-			this.setState({ error: "Sum of tokens should be " + this.state.sum, sumTokenFlag: true });
+		if (sum > this.state.sumToken) {
+			this.setState({ error: "Sum of tokens should be " + this.state.sumToken, sumTokenFlag: true });
 		}
 		else {
 			this.setState({ sumTokenFlag: false });
@@ -334,7 +334,7 @@ class MainPage extends Component {
 				}
 			}
 		});
-		var remaining = this.state.sum - parseInt(total);
+		var remaining = this.state.sumToken - parseInt(total);
 
 		var selected = this.state.selected;
 		if (selected === undefined) {
