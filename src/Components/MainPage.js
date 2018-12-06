@@ -164,15 +164,21 @@ class MainPage extends Component {
 			newState.token.isValid = true;
 		}
 		this.setState(newState);
+		let selected = Object.assign({}, this.state.selected);
+		let currentSum = this.state.total
+		if(selected.is_complete){
+			currentSum = currentSum- this.state.data[this.state.selected.evaluation.rank - 1].evaluation.tokens;
+		}
 		var sum = parseInt(token);
-		sum = sum + this.state.total;
+		sum = sum + currentSum;
+		
 		if (sum > this.state.sumToken) {
 			this.setState({ error: "Sum of tokens should be " + this.state.sumToken, sumTokenFlag: true });
 		}
 		else {
 			this.setState({ sumTokenFlag: false });
 		}
-		let selected = Object.assign({}, this.state.selected);
+		
 		selected.evaluation.tokens = token;
 		this.setState({ selected });
 	}
@@ -210,17 +216,29 @@ class MainPage extends Component {
 			newState.adjective.isValid = false;
 			flag = true;
 		}
-
+		let currentSum = this.state.total
+		if(selected.is_complete){
+			currentSum = currentSum - this.state.data[this.state.selected.evaluation.rank - 1].evaluation.tokens;
+		}
+		let sum = parseInt(this.state.selected.evaluation.tokens);
+		sum = sum + currentSum;
+		if (sum > this.state.sumToken) {
+			flag = true;
+		}
 		this.setState(newState);
 
 		if (!flag) {
 			//For Done Avatar
+			
 			let selected = this.state.selected;
 			selected.is_complete = true;
 			this.setState({ selected })
-			let total = this.state.total
-			total = total + parseInt(this.state.selected.evaluation.tokens)
+			let total = sum
 			this.setState({ total })
+			console.log("done"+currentSum)
+		
+			console.log("currentSum "+currentSum)
+			console.log("total "+ sum)
 			let data = this.state.data;
 			data[this.state.selected.evaluation.rank - 1] = this.state.selected;
 			this.setState({ data });
@@ -329,7 +347,7 @@ class MainPage extends Component {
 
 		this.state.data.forEach(function (d) {
 			if (d.is_complete === true) {
-				if (d.evaluation.tokens != "") {
+				if (d.evaluation.tokens !== "") {
 					total = total + parseInt(d.evaluation.tokens);
 				}
 			}

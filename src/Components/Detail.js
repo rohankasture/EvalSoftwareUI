@@ -188,7 +188,7 @@ class Detail extends Component {
 								<div className={classes.label}>
 									<Typography variant="h6" color="textPrimary" className={classes.text} >
 										Adjective
-										</Typography>
+									</Typography>
 								</div>
 								<div className={classes.input}>
 									<Dropdown options={this.props.options} onChange={this.props.handleAdjectiveChange} value={this.props.selectedUser.evaluation.adjective} placeholder="Select" ></Dropdown>
