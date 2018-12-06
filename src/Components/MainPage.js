@@ -311,7 +311,7 @@ class MainPage extends Component {
 					}
 				})
 				.then(res => {
-					localStorage.setItem("errorMessage","Thank you for submitting the evaluations.")
+					localStorage.setItem("errorMessage","Thank you for submitting the evaluation.")
 					window.location.assign("/success")
 				})
 				.catch(
