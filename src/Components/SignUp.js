@@ -179,7 +179,7 @@ class SignUp extends Component {
             
             <FormControl margin="normal" required fullWidth>
               <InputLabel htmlFor="password">Password</InputLabel>
-              <Input name="password" className = {this.state.password.isValid? "pass":"fail"} type="password" id="password" autoComplete="current-password" onChange={this.handleChangePassword} />
+              <Input name="password" className = {this.state.password.isValid? "pass":"fail"} autoFocus type="password" id="password" autoComplete="current-password" onChange={this.handleChangePassword} />
               {!this.state.password.isValid && <Typography variant ="body2" color = "error">{this.state.password.error}</Typography>}
             </FormControl>
             <FormControl margin="normal" required fullWidth>
@@ -190,7 +190,7 @@ class SignUp extends Component {
             </FormControl>
             <FormControl margin="normal" required fullWidth>
               <InputLabel htmlFor="OTP">OTP</InputLabel>
-              <Input id="OTP" className = {this.state.OTP.isValid ? "pass":"fail"} name="OTP" autoComplete="email" autoFocus onChange={(event) => this.handleChangeOTP(event)} />
+              <Input id="OTP" className = {this.state.OTP.isValid ? "pass":"fail"} name="OTP" autoComplete="email"  onChange={(event) => this.handleChangeOTP(event)} />
               {!this.state.OTP.isValid && <Typography variant ="body2" color = "error">{this.state.OTP.error}</Typography>}
               
             </FormControl>

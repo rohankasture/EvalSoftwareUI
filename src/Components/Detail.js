@@ -119,7 +119,7 @@ class Detail extends Component {
 				/>
 			);
 		}
-		const button = is_manager === "1" ? (
+		const button = is_manager === 1 ? (
 			<Button color="secondary" variant='contained' className={classes.button} onClick={this.props.handleNext}> Next</Button>
 		) : (
 				<Button color="secondary" variant='contained' className={classes.button} onClick={this.props.handleDone}> Done</Button>
