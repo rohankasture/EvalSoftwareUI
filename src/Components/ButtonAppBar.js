@@ -23,9 +23,8 @@ const styles = {
 };
 
 function handleClick(){
-console.log("clicked logout")
-localStorage.removeItem('auth_token');
-window.location.assign('/');
+  localStorage.removeItem('auth_token');
+  window.location.assign('/');
 }
 function ButtonAppBar(props) {
   const { classes } = props;

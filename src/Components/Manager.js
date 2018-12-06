@@ -79,7 +79,6 @@ class Manager extends Component {
     render() {
         const { classes } = this.props;
         if (this.props.back) {
-            console.log("change ui")
             return (
                 <Detail handleTokenChange={this.props.handleTokenChange}
                     handleAdjectiveChange={this.props.handleAdjectiveChange}
