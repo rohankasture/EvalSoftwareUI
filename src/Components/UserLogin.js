@@ -101,6 +101,7 @@ class UserLogin extends Component {
             window.location.assign("/error")
           }
           else {
+            localStorage.setItem("firstname",res['data']['first_name'])
             window.location.assign("/signup")
           }
         }.bind(this)

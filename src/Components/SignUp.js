@@ -173,7 +173,7 @@ class SignUp extends Component {
             <LockIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Hello {localStorage.getItem("username")}
+            Hello {localStorage.getItem("first_name")}
           </Typography>
           <form className={classes.form}>
             
