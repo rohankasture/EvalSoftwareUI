@@ -173,7 +173,7 @@ class SignUp extends Component {
             <LockIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Hello {localStorage.getItem("first_name")}
+            Hello {localStorage.getItem("firstname")}
           </Typography>
           <form className={classes.form}>
             
@@ -184,7 +184,7 @@ class SignUp extends Component {
             </FormControl>
             <FormControl margin="normal" required fullWidth>
               <InputLabel htmlFor="password">Confirm Password</InputLabel>
-              <Input name="password" className = {this.state.confirmpassword.isValid? "pass":"fail"} type="password" id="password" autoComplete="current-password" onChange={this.handleChangeConfirmPassword} />
+              <Input name="confirmPassword" className = {this.state.confirmpassword.isValid? "pass":"fail"} type="password" id="confirmPassword" autoComplete="current-password" onChange={this.handleChangeConfirmPassword} />
               {!this.state.confirmpassword.isValid && <Typography variant ="body2" color = "error">{this.state.confirmpassword.error}</Typography>}
               {this.state.loginFlag && <Typography variant ="body2" color = "error">{this.state.error_message}</Typography>}
             </FormControl>
