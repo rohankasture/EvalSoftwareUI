@@ -12,6 +12,8 @@ import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
 import axios from 'axios';
 import "./LoginPage.css";
+import muiTheme from './Theme.js';
+import { MuiThemeProvider } from '@material-ui/core/styles';
 
 const styles = theme => ({
   main: {
@@ -99,12 +101,11 @@ class Login extends Component {
     event.preventDefault();
     const username = this.state.username.value;
     const password = this.state.password.value;
-    console.log(username +"" + password)
     var loginData = {
       "username": username,
       "password": password
     };
-    console.log(loginData)
+   
     axios
       .post("https://localhost:55555/login", loginData, {
         headers: {
@@ -115,7 +116,6 @@ class Login extends Component {
       })
       .then(
         function (res) {
-          console.log(res)
           if( res['data']['status_code'] !== 200){
             this.setState({loginFlag:true});
             this.setState({error_message:res['data']['log']}); 
@@ -130,14 +130,16 @@ class Login extends Component {
         }.bind(this)
       )
       .catch(function (err) {
-        alert("Invalid credentials");
-        console.log(err);
+        localStorage.setItem("errorMessage", err)
+        window.location.assign("/error")
       });
 
   };
   render() {
     const { classes } = this.props;
     return (
+      <MuiThemeProvider theme={muiTheme}>
+			<CssBaseline />
       <main className={classes.main}>
         <h2>Welcome to CSCI-P 532/632 Evaluation Software</h2>
         <CssBaseline />
@@ -171,10 +173,12 @@ class Login extends Component {
             >
               Sign in
             </Button>
-            <span><br/><br/><a href ="/signup">Create an Account</a></span>
+            <span><br/><br/><a href ="/register">Forget password</a></span>
           </form>
         </Paper>
       </main>
+      </MuiThemeProvider>
+     
     );
   }
 }

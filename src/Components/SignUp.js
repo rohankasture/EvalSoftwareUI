@@ -12,6 +12,9 @@ import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
 import axios from 'axios';
 import "./LoginPage.css";
+import muiTheme from './Theme.js';
+import { MuiThemeProvider } from '@material-ui/core/styles';
+
 
 const styles = theme => ({
   main: {
@@ -49,7 +52,7 @@ class SignUp extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      username:{
+      OTP:{
         value : "",
         isValid: true,
         error : ""
@@ -67,22 +70,22 @@ class SignUp extends Component {
       loginFlag : false,
       error_message : "",
     };
-    this.handleSearch = this.handleSearch.bind(this);
-    this.handleChangeUserName = this.handleChangeUserName.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleChangeOTP = this.handleChangeOTP.bind(this);
     this.handleChangePassword = this.handleChangePassword.bind(this);
     this.handleChangeConfirmPassword = this.handleChangeConfirmPassword.bind(this);
   }
-  handleChangeUserName(event) {
+  handleChangeOTP(event) {
     let newState = Object.assign({}, this.state);
     newState.loginFlag = false;
     if(event.target.value == ""){
-      newState.username.error = "Username is Required";
-      newState.username.isValid = false;
+      newState.OTP.error = "OTP is Required";
+      newState.OTP.isValid = false;
     }
     else{
-      newState.username.value = event.target.value;
-      newState.username.error = "";
-      newState.username.isValid = true;
+      newState.OTP.value = event.target.value;
+      newState.OTP.error = "";
+      newState.OTP.isValid = true;
        }
     this.setState(newState);
   }
@@ -116,16 +119,15 @@ class SignUp extends Component {
        }
     this.setState(newState);
   }
-  handleSearch = (event) => {
+  handleSubmit = (event) => {
     event.preventDefault();
-    const username = this.state.username.value;
+    const OTP = this.state.OTP.value;
     const password = this.state.password.value;
     const confirmpassword = this.state.confirmpassword.value;
-    console.log(username +"" + password)
-    console.log(confirmpassword)
     var loginData = {
-      "username": username,
-      "password": password
+      "otp": OTP,
+      "password": password,
+      "username": localStorage.getItem("username"),
     };
 
     if (password != confirmpassword)
@@ -133,33 +135,36 @@ class SignUp extends Component {
         this.setState({loginFlag:true, error_message:"Passwords don't match. Please try again!"})
     }  
 
-    // axios
-    //   .post("https://localhost:55555/login", loginData, {
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //       "Access-Control-Allow-Origin": "*",
-    //       crossDomain: true
-    //     }
-    //   })
-    //   .then(
-    //     function (res) {
-    //       // console.log(res['data']['status_code']);
-    //       if( res['data']['status_code'] != 200){
-    //         // alert("Invalid credentials");  
-    //         // window.location.assign('/'); 
-    //         this.setState({loginFlag:true});
-    //         this.setState({error_message:res['data']['log']}); 
-    //       }  
-    //     }.bind(this)
-    //   )
-    //   .catch(function (err) {
-    //     console.log(err);
-    //   });
+    axios
+      .post("https://localhost:55555/check-otp", loginData, {
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*",
+          crossDomain: true
+        }
+      })
+      .then(
+        function (res) {
+          if (res['data']['status_code'] != 200) {
+            localStorage.setItem("errorMessage", res['data']['log'])
+            window.location.assign("/error")
+          }
+          else {
+            window.location.assign("/")
+          }
+        }.bind(this)
+      )
+      .catch(function (err) {
+        localStorage.setItem("errorMessage", err)
+        window.location.assign("/error")
+      });
 
   };
   render() {
     const { classes } = this.props;
     return (
+      <MuiThemeProvider theme={muiTheme}>
+			<CssBaseline />
       <main className={classes.main}>
         <h2>Welcome to CSCI-P 532/632 Evaluation Software</h2>
         <CssBaseline />
@@ -168,39 +173,42 @@ class SignUp extends Component {
             <LockIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Sign Up
+            Hello {localStorage.getItem("firstname")}
           </Typography>
           <form className={classes.form}>
-            <FormControl margin="normal" required fullWidth>
-              <InputLabel htmlFor="email">IU Username</InputLabel>
-              <Input id="email" className = {this.state.username.isValid ? "pass":"fail"} name="email" autoComplete="email" autoFocus onChange={(event) => this.handleChangeUserName(event)} />
-              {!this.state.username.isValid && <Typography variant ="body2" color = "error">{this.state.username.error}</Typography>}
-              
-            </FormControl>
+            
             <FormControl margin="normal" required fullWidth>
               <InputLabel htmlFor="password">Password</InputLabel>
-              <Input name="password" className = {this.state.password.isValid? "pass":"fail"} type="password" id="password" autoComplete="current-password" onChange={this.handleChangePassword} />
+              <Input name="password" className = {this.state.password.isValid? "pass":"fail"} autoFocus type="password" id="password" autoComplete="current-password" onChange={this.handleChangePassword} />
               {!this.state.password.isValid && <Typography variant ="body2" color = "error">{this.state.password.error}</Typography>}
             </FormControl>
             <FormControl margin="normal" required fullWidth>
               <InputLabel htmlFor="password">Confirm Password</InputLabel>
-              <Input name="password" className = {this.state.confirmpassword.isValid? "pass":"fail"} type="password" id="password" autoComplete="current-password" onChange={this.handleChangeConfirmPassword} />
+              <Input name="confirmPassword" className = {this.state.confirmpassword.isValid? "pass":"fail"} type="password" id="confirmPassword" autoComplete="current-password" onChange={this.handleChangeConfirmPassword} />
               {!this.state.confirmpassword.isValid && <Typography variant ="body2" color = "error">{this.state.confirmpassword.error}</Typography>}
               {this.state.loginFlag && <Typography variant ="body2" color = "error">{this.state.error_message}</Typography>}
+            </FormControl>
+            <FormControl margin="normal" required fullWidth>
+              <InputLabel htmlFor="OTP">OTP</InputLabel>
+              <Input id="OTP" className = {this.state.OTP.isValid ? "pass":"fail"} name="OTP" autoComplete="email"  onChange={(event) => this.handleChangeOTP(event)} />
+              {!this.state.OTP.isValid && <Typography variant ="body2" color = "error">{this.state.OTP.error}</Typography>}
+              
             </FormControl>
             <Button 
               type="submit"
               fullWidth
               variant="contained"
               color="primary"
-              onClick={(event) => this.handleSearch(event)}
+              onClick={(event) => this.handleSubmit(event)}
               className={classes.submit}
             >
-              Sign Up
+              Register
             </Button>
           </form>
         </Paper>
       </main>
+      </MuiThemeProvider>
+      
     );
   }
 }
