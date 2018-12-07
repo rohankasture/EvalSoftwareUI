@@ -116,7 +116,7 @@ class Detail extends Component {
 					token={this.props.token}
 					description={this.props.description}
 					handleManagerChange={this.props.handleManagerChange}
-
+					manager = {this.props.manager}
 				/>
 			);
 		}

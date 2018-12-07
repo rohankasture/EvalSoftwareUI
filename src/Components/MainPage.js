@@ -79,6 +79,12 @@ class MainPage extends Component {
 				isValid: true,
 				error: ""
 			},
+			
+			manager:{
+				value: "",
+				isValid: true,
+				error: ""
+			},
 			submitError: false,
 		};
 		this.handleTokenChange = this.handleTokenChange.bind(this);
@@ -203,6 +209,19 @@ class MainPage extends Component {
 		let selected = Object.assign({}, this.state.selected);
 		let newState = Object.assign({}, this.state);
 		let flag = false;
+		
+		if(selected.is_manager === 1){
+			newState.manager.error = "";
+			newState.manager.isValid = true;
+			for (var key in selected.manager) {
+				if (key !="mgr_description" && selected.manager[key] === -1) {
+					flag = true;
+					newState.manager.error = "Rate all the qualities"
+					newState.manager.isValid = false;
+					break;
+				}
+			}
+		}
 		if (selected.evaluation.tokens === "") {
 			newState.token.error = "Token is Required";
 			newState.token.isValid = false;
@@ -424,6 +443,7 @@ class MainPage extends Component {
 									token={this.state.token}
 									description={this.state.description}
 									adjective={this.state.adjective}
+									manager = {this.state.manager}
 								/>
 							</Grid>
 							<CustomizedSnackbars  open ={this.state.submitError} variant="error" message ="Please fill all evaluations" handleClose={this.handleClose}/>

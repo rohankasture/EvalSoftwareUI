@@ -178,7 +178,8 @@ class Manager extends Component {
                     <Grid item>
                       
                             <div className={classes.label}>
-                                <Typography variant="body2" color="error" className={classes.text}>"Error"</Typography>
+                            {!this.props.manager.isValid && <Typography variant="body2" color="error" className={classes.text}>{this.props.manager.error}</Typography>}
+                                {/* <Typography variant="body2" color="error" className={classes.text}>"Error"</Typography> */}
                             </div>
 
                             <div className={classes.buttons}>
