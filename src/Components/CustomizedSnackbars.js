@@ -93,6 +93,10 @@ const styles2 = theme => ({
   },
 });
 
+//This is customizable snackbar. It can be used to show diffent type of message with its type .
+// Needs to pass variant based on type and message and initial state of Snackbar
+// variant could be  success  , warning , error , info
+
 class CustomizedSnackbars extends React.Component {
     constructor(props){
       super(props);
@@ -100,6 +104,7 @@ class CustomizedSnackbars extends React.Component {
         open: true,
       };
     }
+    
   render() {
     const { classes } = this.props;
     

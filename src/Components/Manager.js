@@ -66,7 +66,7 @@ const rows = [
     createData("Task Delegation & Ownership", "task_delegation_and_ownership"), createData("Encourage Team Development", "encourage_team_development"), createData("Realistic Expectation", "realistic_expectation"), createData("Performance Under Stress", "performance_under_stress")
 ];
 
-
+// This is used to show the qualities of manager for P632 
 class Manager extends Component {
     constructor(props) {
         super(props);

@@ -49,6 +49,8 @@ const styles = theme => ({
 	}
 
 });
+
+// This is the main page of the website, it manages the interaction of all components and states.
 class MainPage extends Component {
 	constructor(props) {
 		super(props);
@@ -121,7 +123,7 @@ class MainPage extends Component {
 					localStorage.setItem("week",res.data.team[0].week)
 					// this.setState({sumToken: res.data.team.length*10}) This can be used to make tokens proportional to team member
 					this.setState({data: res.data.team})
-					this.setState({selected:JSON.parse(JSON.stringify(res.data.team[0])) })
+					this.setState({selected:JSON.parse(JSON.stringify(res.data.team[0])) }) // selected should have deep cloned object so that it won't reflect changes directly. 
 					this.addAdjective('Good Adjectives',res.data.good_adjectives)
 					this.addAdjective('Bad Adjectives',res.data.bad_adjectives)
 				}
@@ -235,10 +237,6 @@ class MainPage extends Component {
 			this.setState({ selected })
 			let total = sum
 			this.setState({ total })
-			console.log("done"+currentSum)
-		
-			console.log("currentSum "+currentSum)
-			console.log("total "+ sum)
 			let data = this.state.data;
 			data[this.state.selected.evaluation.rank - 1] = this.state.selected;
 			this.setState({ data });
@@ -311,7 +309,7 @@ class MainPage extends Component {
 					}
 				})
 				.then(res => {
-					localStorage.setItem("errorMessage","Thank you for submitting the evaluations.")
+					localStorage.setItem("errorMessage","Thank you for submitting the evaluation.")
 					window.location.assign("/success")
 				})
 				.catch(

@@ -46,6 +46,7 @@ const styles = theme => ({
     marginTop: theme.spacing.unit * 6,
   },
 });
+// Login page
 
 class Login extends Component {
   constructor(props) {
@@ -64,7 +65,7 @@ class Login extends Component {
       loginFlag : false,
       error_message : "",
     };
-    this.handleSearch = this.handleSearch.bind(this);
+    this.handleSignIn = this.handleSignIn.bind(this);
     this.handleChangeUserName = this.handleChangeUserName.bind(this);
     this.handleChangePassword = this.handleChangePassword.bind(this);
   }
@@ -97,7 +98,7 @@ class Login extends Component {
        }
     this.setState(newState);
   }
-  handleSearch = (event) => {
+  handleSignIn = (event) => {
     event.preventDefault();
     const username = this.state.username.value;
     const password = this.state.password.value;
@@ -135,6 +136,7 @@ class Login extends Component {
       });
 
   };
+
   render() {
     const { classes } = this.props;
     return (
@@ -168,7 +170,7 @@ class Login extends Component {
               fullWidth
               variant="contained"
               color="primary"
-              onClick={(event) => this.handleSearch(event)}
+              onClick={(event) => this.handleSignIn(event)}
               className={classes.submit}
             >
               Sign in

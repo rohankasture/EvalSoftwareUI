@@ -1,9 +1,6 @@
 import React, { Component } from "react";
 import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
-import Grid from '@material-ui/core/Grid';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
 import ButtonAppBar from './ButtonAppBar';
 import PropTypes from 'prop-types';
 import Paper from '@material-ui/core/Paper';
@@ -31,7 +28,8 @@ const styles = theme => ({
         padding: `${theme.spacing.unit * 2}px ${theme.spacing.unit * 3}px ${theme.spacing.unit * 3}px`,
     }
 });
-
+// This is used to show message . It can be used to show other message
+// it reads from localstorage . key should be errorMessage while setting it up 
 class ErrorPage extends Component {
 
     render() {
