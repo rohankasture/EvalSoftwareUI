@@ -129,10 +129,8 @@ We are always open to [your feedback](https://github.com/facebook/create-react-a
 
 ## Folder Structure
 
-After creation, your project should look like this:
-
-```
-my-app/
+ ```
+ EvalSoftwareUI/
   README.md
   node_modules/
   package.json
@@ -140,6 +138,21 @@ my-app/
     index.html
     favicon.ico
   src/
+    Components/
+      ButtonAppBar.js
+      CustomizedSnackbars.js
+      Detail.css
+      Detail.js
+      ErrorPage.js
+      LoginPage.js
+      LoginPage.css
+      MainPage.js
+      Manager.js
+      SignUp.js
+      Theme.js
+      Tile.js
+      UserLogin.js
+     Images/
     App.css
     App.js
     App.test.js
