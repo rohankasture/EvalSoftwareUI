@@ -66,7 +66,7 @@ const rows = [
     createData("Task Delegation & Ownership", "task_delegation_and_ownership"), createData("Encourage Team Development", "encourage_team_development"), createData("Realistic Expectation", "realistic_expectation"), createData("Performance Under Stress", "performance_under_stress")
 ];
 
-
+// This is used to show the qualities of manager for P632 
 class Manager extends Component {
     constructor(props) {
         super(props);
@@ -178,7 +178,8 @@ class Manager extends Component {
                     <Grid item>
                       
                             <div className={classes.label}>
-                                <Typography variant="body2" color="error" className={classes.text}>"Error"</Typography>
+                            {!this.props.manager.isValid && <Typography variant="body2" color="error" className={classes.text}>{this.props.manager.error}</Typography>}
+                                {/* <Typography variant="body2" color="error" className={classes.text}>"Error"</Typography> */}
                             </div>
 
                             <div className={classes.buttons}>

@@ -64,7 +64,7 @@ const styles = theme => ({
 
 });
 
-
+// To make textfield to take number format
 function NumberFormatCustom(props) {
 	const { inputRef, onChange, ...other } = props;
 
@@ -89,6 +89,7 @@ NumberFormatCustom.propTypes = {
 	onChange: PropTypes.func.isRequired,
 };
 
+// This component is used to show details about evaluee. 
 class Detail extends Component {
 	constructor(props) {
 		super(props);
@@ -115,7 +116,7 @@ class Detail extends Component {
 					token={this.props.token}
 					description={this.props.description}
 					handleManagerChange={this.props.handleManagerChange}
-
+					manager = {this.props.manager}
 				/>
 			);
 		}
@@ -158,15 +159,6 @@ class Detail extends Component {
 
 								</div>
 								<div className={classes.inputDiv}>
-									{/* <Input
-										required
-										autoFocus
-										name="Token"
-										value={this.props.selectedUser.evaluation.tokens}
-										onBlur={(event) => { this.props.handleTokenChange(event.target.defaultValue) }} //event.persist();
-										onChange={(event) => this.props.handleTokenChange(event.target.value)}
-										
-									/> */}
 									<TextField
 										className={classes.input}
 										name="Token"

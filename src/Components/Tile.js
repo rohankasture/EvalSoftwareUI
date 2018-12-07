@@ -39,7 +39,8 @@ const styles = theme => ({
 		height :10,
 	  },
   });
-
+  
+// It shows the tiles with user name
 class Tile extends Component {
 
 	constructor(props) {
