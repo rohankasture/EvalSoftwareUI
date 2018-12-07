@@ -26,6 +26,7 @@ function handleClick(){
   localStorage.removeItem('auth_token');
   window.location.assign('/');
 }
+// Appbar  on the screen
 function ButtonAppBar(props) {
   const { classes } = props;
   return (

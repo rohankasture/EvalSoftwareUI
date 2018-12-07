@@ -1,5 +1,6 @@
 import { createMuiTheme } from '@material-ui/core/styles';
 
+// custom theme for the application
 export default createMuiTheme(
       {
             palette: {

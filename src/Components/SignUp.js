@@ -47,7 +47,7 @@ const styles = theme => ({
     marginTop: theme.spacing.unit * 6,
   },
 });
-
+// USed for signup/ forget password
 class SignUp extends Component {
   constructor(props) {
     super(props);
