@@ -112,7 +112,7 @@ class MainPage extends Component {
 		};
 		this.setState({selected:this.state.data[0]});
 		axios
-			.post(`https://localhost:55555/team`,token,{
+			.post(`https://snowy.sice.indiana.edu:team`,token,{
 				headers: {
 					"Content-Type": "application/json",
 					"Access-Control-Allow-Origin": "*",
@@ -320,7 +320,7 @@ class MainPage extends Component {
 				"week": localStorage.getItem('week')
 			};
 			axios
-				.post(`https://localhost:55555/evaluations`, body, {
+				.post(`https://snowy.sice.indiana.edu:55555/evaluations`, body, {
 					headers: {
 						"Content-Type": "application/json",
 						"Access-Control-Allow-Origin": "*",
