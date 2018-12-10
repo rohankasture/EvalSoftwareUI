@@ -136,7 +136,7 @@ class SignUp extends Component {
     }  
 
     axios
-      .post("https://snowy.sice.indiana.edu:55555/check-otp", loginData, {
+      .post("https://localhost:55555/check-otp", loginData, {
         headers: {
           "Content-Type": "application/json",
           "Access-Control-Allow-Origin": "*",
